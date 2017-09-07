@@ -1,6 +1,7 @@
 object ovF_CadPadrao: TovF_CadPadrao
   Left = 418
   Top = 309
+  BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'ovF_CadPadrao'
   ClientHeight = 542

@@ -20,7 +20,6 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
-
   protected
     function fValidaCampos:Boolean; virtual; abstract;
     procedure pGravar; virtual; abstract;

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, fCadPadrao, StdCtrls, ExtCtrls, Mask, ToolEdit, CurrEdit, uGeral,
-  dmMySQL, ComCtrls;
+  dmMySQL, ComCtrls, Grids, DBGrids, DB, DBClient;
 
 type
   TovF_CadPessoas = class(TovF_CadPadrao)
@@ -13,9 +13,6 @@ type
     Label1: TLabel;
     ovE_Nome: TEdit;
     Label2: TLabel;
-    ovP_Aluno: TPanel;
-    Label3: TLabel;
-    ovE_Responsavel: TEdit;
     Panel1: TPanel;
     Panel2: TPanel;
     Label4: TLabel;
@@ -29,6 +26,20 @@ type
     ovPC_Container: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
+    DBGrid1: TDBGrid;
+    ovCE_DepCodigo: TRxCalcEdit;
+    Label3: TLabel;
+    ovE_DepNome: TEdit;
+    Label6: TLabel;
+    ovDE_DepDataNascimento: TDateEdit;
+    Label8: TLabel;
+    oCDS_Dependentes: TClientDataSet;
+    oDS_Dependentes: TDataSource;
+    oCDS_DependentesCodigo: TIntegerField;
+    oCDS_DependentesNome: TStringField;
+    oCDS_DependentesDataNascimento: TDateField;
+    ovB_DepAdicionar: TButton;
+    ovB_DepRemover: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
   private
@@ -62,7 +73,7 @@ end;
 procedure TovF_CadPessoas.FormCreate(Sender: TObject);
 begin
   inherited;
-  
+  ovPC_Container.TabIndex := 0;  
 end;
 
 //******************************************************************************
@@ -85,29 +96,7 @@ begin
     Exit;
   end;
 
-  if Trim(ovE_Responsavel.Text) = '' then
-  begin
-    p_MsgAviso('Responsável é obrigatório.');
-    ovE_Responsavel.SetFocus;
-    Result := false;
-    Exit;
-  end;
-
-  if ovDE_Nascimento.Date = 0 then
-  begin
-    p_MsgAviso('Data de nascimento é obrigatória.');
-    ovDE_Nascimento.SetFocus;
-    Result := false;
-    Exit;
-  end;
-
-  if Trim(ovE_Responsavel.Text) = '' then
-  begin
-    p_MsgAviso('Responsável é obrigatório.');
-    ovE_Responsavel.SetFocus;
-    Result := false;
-    Exit;
-  end;
+  
 end;
 
 //******************************************************************************
@@ -125,23 +114,7 @@ begin
   try
     DBBeginTrans;
     vsPesCodigo := ovCE_Codigo.Text;
-    vsSQL := 'INSERT INTO Pessoas SET Pes_Codigo = '+vsPesCodigo+
-             ' , Pes_Nome = '+f_StrToSQL(ovE_Nome.Text)+
-             ' , Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text)+
-             ' , Pes_DDDCel = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_Celular = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_DDDFone = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_Fone = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_DataNascimento = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_NumEndereco = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_Endereco = '+f_StrToSQL(ovCE_DDDCel.Text);
-    showmessage(vsSQL);
-
-    vsAluCodigo := IntToStr(f_GetProxCodigo('Alunos', 'Alu_Codigo', 'Pes_Codigo = '+vsPesCodigo));
-    vsSQL := 'INSERT INTO Alunos SET Pes_Codigo = '+vsPesCodigo+
-             ' , Alu_Codigo = '+vsAluCodigo+
-             ' , Alu_Responsavel = '+f_StrToSQL(ovE_Responsavel.Text);
-    showmessage(vsSQL);
+    
     DBCommit;
   except
     on E : Exception do
