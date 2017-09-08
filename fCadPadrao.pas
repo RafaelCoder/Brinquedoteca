@@ -12,7 +12,7 @@ type
     ovP_Container: TPanel;
     ovB_Confirmar: TButton;
     ovB_Cancelar: TButton;
-    Button1: TButton;
+    ovB_Pesquisar: TButton;
     ovB_Sair: TButton;
     procedure ovB_SairClick(Sender: TObject);
     procedure ovB_ConfirmarClick(Sender: TObject);

@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, fCadPadrao, StdCtrls, ExtCtrls, Mask, ToolEdit, CurrEdit, uGeral,
-  dmMySQL, ComCtrls, Grids, DBGrids, DB, DBClient;
+  dmMySQL, ComCtrls, Grids, DBGrids, DB, DBClient,
+  fPsqPessoas;
 
 type
   TovF_CadPessoas = class(TovF_CadPadrao)
@@ -42,6 +43,7 @@ type
     ovB_DepRemover: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure ovB_PesquisarClick(Sender: TObject);
   private
     vbEditando : Boolean;
   protected
@@ -56,6 +58,7 @@ type
 
 var
   ovF_CadPessoas: TovF_CadPessoas;
+  ovF_PsqPessoas1 : TovF_PsqPessoas;
 
 implementation
 
@@ -64,6 +67,9 @@ implementation
 //******************************************************************************
 procedure TovF_CadPessoas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  if ovF_PsqPessoas1 <> nil then
+    FreeAndNil(ovF_PsqPessoas1);
+
   Action := caFree;
   Release;
   ovF_CadPessoas := nil;
@@ -73,7 +79,8 @@ end;
 procedure TovF_CadPessoas.FormCreate(Sender: TObject);
 begin
   inherited;
-  ovPC_Container.TabIndex := 0;  
+  oCDS_Dependentes.CreateDataSet;
+  ovF_PsqPessoas1 := TovF_PsqPessoas.Create(Self);
 end;
 
 //******************************************************************************
@@ -83,6 +90,7 @@ begin
   if ovCE_Codigo.Value <= 0 then
   begin
     p_MsgAviso('Código é obrigatório.');
+    ovPC_Container.TabIndex := 0;
     ovCE_Codigo.SetFocus;
     Result := false;
     Exit;
@@ -91,25 +99,21 @@ begin
   if Trim(ovE_Nome.Text) = '' then
   begin
     p_MsgAviso('Nome é obrigatório.');
+    ovPC_Container.TabIndex := 0;
     ovE_Nome.SetFocus;
     Result := false;
     Exit;
   end;
 
   
-  if Trim(ovE_Responsavel.Text) = '' then
-  begin
-    p_MsgAviso('Responsável é obrigatório.');
-    ovE_Responsavel.SetFocus;
-    Result := false;
-    Exit;
-  end;
 end;
 
 //******************************************************************************
 procedure TovF_CadPessoas.pCarregaDados;
 begin
-
+  ovCE_Codigo.Text := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Codigo').AsString;
+  ovE_Nome.Text    := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Nome').AsString;
+  ovME_CPF.Text    := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_CPFCNPJ').AsString;
 
 end;
 
@@ -121,23 +125,7 @@ begin
   try
     DBBeginTrans;
     vsPesCodigo := ovCE_Codigo.Text;
-    vsSQL := 'INSERT INTO Pessoas SET Pes_Codigo = '+vsPesCodigo+
-             ' , Pes_Nome = '+f_StrToSQL(ovE_Nome.Text)+
-             ' , Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text)+
-             ' , Pes_DDDCel = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_Celular = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_DDDFone = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_Fone = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_DataNascimento = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_NumEndereco = '+f_StrToSQL(ovCE_DDDCel.Text)+
-             ' , Pes_Endereco = '+f_StrToSQL(ovCE_DDDCel.Text);
-    showmessage(vsSQL);
-
-    vsAluCodigo := IntToStr(f_GetProxCodigo('Alunos', 'Alu_Codigo', 'Pes_Codigo = '+vsPesCodigo));
-    vsSQL := 'INSERT INTO Alunos SET Pes_Codigo = '+vsPesCodigo+
-             ' , Alu_Codigo = '+vsAluCodigo+
-             ' , Alu_Responsavel = '+f_StrToSQL(ovE_Responsavel.Text);
-    showmessage(vsSQL);
+    
     DBCommit;
   except
     on E : Exception do
@@ -151,14 +139,40 @@ end;
 //******************************************************************************
 procedure TovF_CadPessoas.pNovo;
 begin
-  ovCE_Codigo.Value := f_GetProxCodigo('Pessoas', 'Pes_Codigo', '');
+  ovPC_Container.TabIndex := 0;
+  ovCE_Codigo.Value := f_GetProxCodigo('Clientes', 'Cli_Codigo', '');
   vbEditando := False;
+  ovE_Nome.SetFocus;
 end;
 
 //******************************************************************************
 procedure TovF_CadPessoas.pLimparCampos;
 begin
+  oCDS_Dependentes.EmptyDataSet;
+  ovCE_Codigo.Clear;
+  ovE_Nome.Clear;
+  ovCE_DDDFone.Clear;
+  ovCE_Fone.Clear;
+  ovCE_DDDCel.Clear;
+  ovCE_Celular.Clear;
+  ovME_CPF.Clear;
+end;
 
+//******************************************************************************
+procedure TovF_CadPessoas.ovB_PesquisarClick(Sender: TObject);
+begin
+  inherited;
+  ovF_PsqPessoas1 := TovF_PsqPessoas.Create(Self);
+  if ovF_PsqPessoas1.ShowModal <> mrOK then
+    Exit;
+
+  if ovF_PsqPessoas1.oCDS_Pesquisa.IsEmpty then
+    Exit;
+
+  if ovF_PsqPessoas1.oCDS_Pesquisa.RecNo < 0 then
+    Exit;
+
+  pCarregaDados;
 end;
 
 //******************************************************************************

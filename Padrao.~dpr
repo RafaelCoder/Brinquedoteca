@@ -8,7 +8,8 @@ uses
   fCadPessoas in 'fCadPessoas.pas' {ovF_CadPessoas},
   uGeral in 'uGeral.pas',
   uControllerPessoas in 'uControllerPessoas.pas' {ControllerPessoas: TDataModule},
-  uDAOPessoas in 'uDAOPessoas.pas' {DAOPessoas: TDataModule};
+  uDAOPessoas in 'uDAOPessoas.pas' {DAOPessoas: TDataModule},
+  fPsqPadrao in 'fPsqPadrao.pas' {ovF_PsqPadrao};
 
 {$R *.res}
 

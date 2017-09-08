@@ -12,6 +12,9 @@ inherited ovF_CadPessoas: TovF_CadPessoas
   inherited pnl1: TPanel
     Left = 618
     Height = 352
+    inherited ovB_Pesquisar: TButton
+      OnClick = ovB_PesquisarClick
+    end
   end
   inherited ovP_Container: TPanel
     Width = 618
@@ -21,7 +24,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
       Top = 1
       Width = 616
       Height = 350
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet

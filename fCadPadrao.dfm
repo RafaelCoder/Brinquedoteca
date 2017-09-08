@@ -44,7 +44,7 @@ object ovF_CadPadrao: TovF_CadPadrao
       TabOrder = 1
       OnClick = ovB_CancelarClick
     end
-    object Button1: TButton
+    object ovB_Pesquisar: TButton
       Left = 0
       Top = 50
       Width = 100
