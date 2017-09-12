@@ -18,10 +18,11 @@ type
     oCDS_PesquisaPes_CPFCNPJ: TStringField;
     oCDS_PesquisaCli_Codigo: TIntegerField;
     procedure ovB_AtualizarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    function fConsulta(arrVal : array of string):boolean; override;
   end;
 
 var
@@ -34,20 +35,34 @@ implementation
 //******************************************************************************
 procedure TovF_PsqPessoas.ovB_AtualizarClick(Sender: TObject);
 begin
-  inherited;
-  vsSQL := ' SELECT P.Pes_Codigo, C.Cli_Codigo, Pes_Nome, Pes_CPFCNPJ, Pes_DDDCel, Pes_Celular, Pes_DDDFone,'+
-           '  Pes_Fone, Pes_DataNascimento,Pes_NumEndereco, Pes_Endereco'+
-           ' FROM Pessoas P'+
-           ' INNER JOIN Clientes C ON C.Pes_Codigo = P.Pes_Codigo'+
-           ' WHERE 1=1';
+  vsWHERE := '1=1';
   if ovCE_Codigo.Text <> '' then
-    vsSQL := vsSQL + ' AND C.Cli_Codigo = '+ovCE_Codigo.Text;
+    vsWHERE := vsWHERE + ' AND C.Cli_Codigo = '+ovCE_Codigo.Text;
 
   if ovCE_Codigo.Text <> '' then
-    vsSQL := vsSQL + ' AND P.Pes_Nome LIKE "%'+Trim(ovCE_Codigo.Text)+'%"';
-  vsSQL := vsSQL + ' ORDER BY C.Cli_Codigo';
-  ExecSQL(vsSQL, oCDS_Pesquisa);
-  oCDS_Pesquisa.First;
+    vsWHERE := vsWHERE + ' AND P.Pes_Nome LIKE "%'+Trim(ovCE_Codigo.Text)+'%"';
+  inherited;
+end;
+
+//******************************************************************************
+procedure TovF_PsqPessoas.FormCreate(Sender: TObject);
+begin
+  inherited;
+  vsSELECT := ' SELECT P.Pes_Codigo, C.Cli_Codigo, Pes_Nome, Pes_CPFCNPJ, Pes_DDDCel, Pes_Celular, Pes_DDDFone,'+
+              '  Pes_Fone, Pes_DataNascimento,Pes_NumEndereco, Pes_Endereco'+
+              ' FROM Pessoas P'+
+              ' INNER JOIN Clientes C ON C.Pes_Codigo = P.Pes_Codigo';
+  vsORDERBY := ' ORDER BY C.Cli_Codigo';
+end;
+
+//******************************************************************************
+function TovF_PsqPessoas.fConsulta(arrVal: array of string): boolean;
+begin
+  Result := false;
+  if length(arrVal) <= 0 then
+    Exit;
+  ExecSQL(vsSELECT+' WHERE C.Cli_Codigo = '+arrVal[0], oCDS_Pesquisa);
+  Result := not oCDS_Pesquisa.IsEmpty;
 end;
 
 //******************************************************************************

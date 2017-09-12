@@ -33,6 +33,7 @@ object ovF_PsqPadrao: TovF_PsqPadrao
       Height = 25
       Caption = 'A&tualizar'
       TabOrder = 0
+      OnClick = ovB_AtualizarClick
     end
     object ovB_Confirmar: TButton
       Left = 2
@@ -42,7 +43,6 @@ object ovF_PsqPadrao: TovF_PsqPadrao
       Caption = '&Confirmar'
       ModalResult = 1
       TabOrder = 1
-      OnClick = ovB_ConfirmarClick
     end
     object ovB_Voltar: TButton
       Left = 2

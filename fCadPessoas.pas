@@ -36,14 +36,16 @@ type
     Label8: TLabel;
     oCDS_Dependentes: TClientDataSet;
     oDS_Dependentes: TDataSource;
-    oCDS_DependentesCodigo: TIntegerField;
-    oCDS_DependentesNome: TStringField;
-    oCDS_DependentesDataNascimento: TDateField;
     ovB_DepAdicionar: TButton;
     ovB_DepRemover: TButton;
+    oCDS_DependentesPes_Nome: TStringField;
+    oCDS_DependentesPes_DataNascimento: TDateField;
+    oCDS_DependentesDep_Codigo: TIntegerField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure ovB_PesquisarClick(Sender: TObject);
+    procedure ovCE_CodigoExit(Sender: TObject);
+    procedure ovB_DepAdicionarClick(Sender: TObject);
   private
     vbEditando : Boolean;
   protected
@@ -103,17 +105,41 @@ begin
     ovE_Nome.SetFocus;
     Result := false;
     Exit;
-  end;
-
-  
+  end;  
 end;
 
 //******************************************************************************
 procedure TovF_CadPessoas.pCarregaDados;
+var
+  oCDS : TClientDataSet;
 begin
-  ovCE_Codigo.Text := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Codigo').AsString;
-  ovE_Nome.Text    := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Nome').AsString;
-  ovME_CPF.Text    := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_CPFCNPJ').AsString;
+  oCDS := TClientDataSet.Create(Self);
+  try
+    ovCE_Codigo.Text    := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Cli_Codigo').AsString;
+    ovE_Nome.Text       := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Nome').AsString;
+    ovCE_DDDFone.Text   := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_DDDFone').AsString;
+    ovCE_Fone.Text      := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Fone').AsString;
+    ovCE_DDDCel.Text    := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_DDDCel').AsString;
+    ovCE_Celular.Text   := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Celular').AsString;
+    ovME_CPF.Text       := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_CPFCNPJ').AsString;
+    ExecSQL(' SELECT D.Dep_Codigo, P.Pes_Nome, P.Pes_DataNascimento'+
+            ' FROM Dependentes D'+
+            ' INNER JOIN Pessoas P ON P.Pes_Codigo = D.Pes_Codigo'+
+            ' WHERE D.Cli_Codigo = '+ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Cli_Codigo').AsString, oCDS);
+    oCDS_Dependentes.EmptyDataSet;
+    oCDS.First;
+    while not oCDS.EOF do
+    begin
+      oCDS_Dependentes.Append;
+      oCDS_DependentesDep_Codigo.AsString := oCDS.FieldByName('Dep_Codigo').AsString;
+      oCDS_DependentesPes_Nome.AsString   := oCDS.FieldByname('Pes_Nome').AsString;
+      oCDS_DependentesPes_DataNascimento.AsDateTime := oCDS.FieldByName('Pes_DataNascimento').AsDateTime;
+      oCDS_Dependentes.Post;
+      oCDS.Next;
+    end;
+  finally
+    FreeAndNil(oCDS);
+  end;
 end;
 
 //******************************************************************************
@@ -175,4 +201,25 @@ begin
 end;
 
 //******************************************************************************
+procedure TovF_CadPessoas.ovCE_CodigoExit(Sender: TObject);
+begin
+  inherited;
+  if ovF_PsqPessoas1.fConsulta([ovCE_Codigo.Text]) then
+    pCarregaDados
+  else
+    pLimparCampos;
+end;
+
+//******************************************************************************
+procedure TovF_CadPessoas.ovB_DepAdicionarClick(Sender: TObject);
+begin
+  inherited;
+  if not oCDS_Dependentes.Locate('Dep_Codigo', ovCE_DepCodigo.Value, []) then
+    oCDS_Dependentes.Append
+  else
+    oCDS_Dependentes.Edit;
+  oCDS_DependentesPes_Nome.AsString := ovE_DepNome.Text;
+  oCDS_Dependentes.Post;
+end;
+
 end.

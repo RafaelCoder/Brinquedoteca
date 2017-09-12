@@ -24,7 +24,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
       Top = 1
       Width = 616
       Height = 350
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet
@@ -150,6 +150,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
             ButtonWidth = 0
             NumGlyphs = 2
             TabOrder = 0
+            OnExit = ovCE_CodigoExit
           end
           object ovE_Nome: TEdit
             Left = 125
@@ -191,6 +192,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Height = 222
           Align = alBottom
           DataSource = oDS_Dependentes
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -200,20 +202,22 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Columns = <
             item
               Expanded = False
-              FieldName = 'Codigo'
+              FieldName = 'Dep_Codigo'
               Title.Caption = 'C'#243'digo'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'Nome'
-              Width = 400
+              FieldName = 'Pes_Nome'
+              Title.Caption = 'Nome'
+              Width = 354
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'DataNascimento'
+              FieldName = 'Pes_DataNascimento'
               Title.Caption = 'Data de nascimento'
+              Width = 137
               Visible = True
             end>
         end
@@ -251,6 +255,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Height = 25
           Caption = 'Adicionar'
           TabOrder = 4
+          OnClick = ovB_DepAdicionarClick
         end
         object ovB_DepRemover: TButton
           Left = 256
@@ -268,15 +273,15 @@ inherited ovF_CadPessoas: TovF_CadPessoas
     Params = <>
     Left = 141
     Top = 185
-    object oCDS_DependentesCodigo: TIntegerField
-      FieldName = 'Codigo'
+    object oCDS_DependentesDep_Codigo: TIntegerField
+      FieldName = 'Dep_Codigo'
     end
-    object oCDS_DependentesNome: TStringField
-      FieldName = 'Nome'
+    object oCDS_DependentesPes_Nome: TStringField
+      FieldName = 'Pes_Nome'
       Size = 100
     end
-    object oCDS_DependentesDataNascimento: TDateField
-      FieldName = 'DataNascimento'
+    object oCDS_DependentesPes_DataNascimento: TDateField
+      FieldName = 'Pes_DataNascimento'
     end
   end
   object oDS_Dependentes: TDataSource

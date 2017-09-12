@@ -17,16 +17,16 @@ type
     ovB_Voltar: TButton;
     procedure FormCreate(Sender: TObject);
     procedure ovDBG_PesquisaDblClick(Sender: TObject);
-    procedure ovB_ConfirmarClick(Sender: TObject);
+    procedure ovB_AtualizarClick(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    function fConsulta(arrVal : array of string):boolean; virtual; abstract;
   end;
 
 var
   ovF_PsqPadrao: TovF_PsqPadrao;
-  vsSELECT : String;
+  vsSELECT, vsWHERE, vsORDERBY : String;
 
 implementation
 
@@ -36,7 +36,9 @@ implementation
 procedure TovF_PsqPadrao.FormCreate(Sender: TObject);
 begin
   oCDS_Pesquisa.CreateDataSet;
-  vsSELECT := '';
+  vsSELECT  := '';
+  vsWHERE   := '';
+  vsORDERBY := '';
 end;
 
 //******************************************************************************
@@ -50,11 +52,16 @@ begin
 end;
 
 //******************************************************************************
-procedure TovF_PsqPadrao.ovB_ConfirmarClick(Sender: TObject);
+procedure TovF_PsqPadrao.ovB_AtualizarClick(Sender: TObject);
 begin
+  vsSQL := vsSELECT;
+  if vsWHERE <> '' then
+    vsSQL := vsSQL + ' WHERE ' + vsWHERE;
+  vsSQL := vsSQL + ' ' + vsORDERBY;
   if vsSELECT <> '' then
-    ExecSQL(vsSELECT, oCDS_Pesquisa);
+    ExecSQL(vsSQL, oCDS_Pesquisa);
   oCDS_Pesquisa.First;
 end;
 
+//******************************************************************************
 end.

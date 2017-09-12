@@ -1,5 +1,6 @@
 inherited ovF_PsqPessoas: TovF_PsqPessoas
   Caption = 'Pesquisa de pessoas'
+  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
