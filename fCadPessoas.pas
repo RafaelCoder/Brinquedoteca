@@ -105,7 +105,17 @@ begin
     ovE_Nome.SetFocus;
     Result := false;
     Exit;
-  end;  
+  end;
+
+  if fExtraisNumeros(ovME_CPF.Text) = '' then
+  begin
+    p_MsgAviso('CPF é obrigatório.');
+    ovPC_Container.TabIndex := 0;
+    ovME_CPF.SetFocus;
+    Result := false;
+    Exit;
+  end;
+
 end;
 
 //******************************************************************************
@@ -115,6 +125,7 @@ var
 begin
   oCDS := TClientDataSet.Create(Self);
   try
+    vbEditando := True;
     ovCE_Codigo.Text    := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Cli_Codigo').AsString;
     ovE_Nome.Text       := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_Nome').AsString;
     ovCE_DDDFone.Text   := ovF_PsqPessoas1.oCDS_Pesquisa.FieldByname('Pes_DDDFone').AsString;
@@ -145,12 +156,44 @@ end;
 //******************************************************************************
 procedure TovF_CadPessoas.pGravar;
 var
-  vsPesCodigo, vsAluCodigo : string;
+  vsPesCodigo, vsCliCodigo : string;
 begin
   try
     DBBeginTrans;
-    vsPesCodigo := ovCE_Codigo.Text;
-    
+    vsPesCodigo := IntToStr(f_GetProxCodigo('Pessoas', 'Pes_Codigo', ''));
+    vsCliCodigo := ovCE_Codigo.Text;
+    if not vbEditando then
+    begin
+      vsSQL := ' INSERT INTO Pessoas SET Pes_Codigo = '+vsPesCodigo+
+               ' , Pes_Nome = '+f_StrToSQL(ovE_Nome.Text)+
+               ' , Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text)+
+               ' , Pes_DDDCel = '+f_StrToSQL(ovCE_DDDCel.Text)+
+               ' , Pes_Celular = '+f_StrToSQL(ovCE_Celular.Text)+
+               ' , Pes_DDDFone = '+f_StrToSQL(ovCE_DDDFone.Text)+
+               ' , Pes_Fone = '+f_StrToSQL(ovCE_Fone.Text)+
+               ' , Pes_DataNascimento = NULL'+
+               ' , Pes_NumEndereco = NULL'+
+               ' , Pes_Endereco = NULL';
+      ExecSQL(vsSQL);
+
+      vsSQL := ' INSERT INTO Clientes SET Pes_Codigo = '+vsPesCodigo+
+               ' , Cli_Codigo = '+vsCliCodigo;
+      ExecSQL(vsSQL);
+      oCDS_Dependentes.First;
+      if not oCDS_Dependentes.IsEmpty then
+      begin
+        vsPesCodigo := IntToStr(f_GetProxCodigo('Pessoas', 'Pes_Codigo', ''));
+        vsSQL := ' INSERT INTO Pessoas SET Pes_Codigo = '+vsPesCodigo+
+               ' , Pes_Nome = '+f_StrToSQL(oCDS_DependentesPes_Nome.AsString)+
+               ' , Pes_DataNascimento = '+f_DateToSQL(oCDS_DependentesPes_DataNascimento.AsDateTime);
+        ExecSQL(vsSQL);
+        vsSQL := ' INSERT INTO Dependentes SET Dep_Codigo = '+oCDS_DependentesDep_Codigo.AsString+
+                 ' , Pes_Codigo = '+vsPesCodigo+
+                 ' , Cli_Codigo = '+vsCliCodigo;
+        ExecSQL(vsSQL);              
+      end;
+
+    end;
     DBCommit;
   except
     on E : Exception do
@@ -219,6 +262,7 @@ begin
   else
     oCDS_Dependentes.Edit;
   oCDS_DependentesPes_Nome.AsString := ovE_DepNome.Text;
+  oCDS_DependentesPes_DataNascimento.AsDateTime := ovDE_DepDataNascimento.Date;
   oCDS_Dependentes.Post;
 end;
 

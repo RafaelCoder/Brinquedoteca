@@ -17,15 +17,16 @@ CREATE TABLE Clientes(
     Pes_Codigo INTEGER,
     Cli_Codigo INTEGER,
     PRIMARY KEY (Cli_Codigo),
-    FOREIGN KEY Pes_Codigo REFERENCES Pessoas(Pes_Codigo)
+    FOREIGN KEY (Pes_Codigo) REFERENCES Pessoas(Pes_Codigo)
 );
 
-CREATE TABLE Alunos(
+CREATE TABLE Dependentes(
     Pes_Codigo INTEGER,
-    Alu_Codigo INTEGER,
-    Alu_Responsavel VARCHAR(100),
-    PRIMARY KEY (Alu_Codigo),
-    FOREIGN KEY Pes_Codigo REFERENCES Pessoas(Pes_Codigo)
-);
+    Dep_Codigo INTEGER,
+    Cli_Codigo INTEGER,
+    PRIMARY KEY (Cli_Codigo, Dep_Codigo),
+    FOREIGN KEY (Pes_Codigo) REFERENCES Pessoas(Pes_Codigo),
+    FOREIGN KEY (Cli_Codigo) REFERENCES Clientes(Cli_Codigo)
+);;
 
 

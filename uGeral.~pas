@@ -27,6 +27,7 @@ type
   function fGeraSigla(str: String):String;
   function fGetContentFile(caminho:String):String;
   function fGetValues(ovp:TPanel):TStringList;
+  function fRemoveMascara(vsTxt:String):String;
 
 implementation
 
@@ -274,6 +275,15 @@ begin
   end;
 
   Result := res;
+end;
+
+//******************************************************************************
+function fRemoveMascara(vsTxt:String):String;
+begin
+  vsTxt := StringReplace(vsTxt, '-','', [rfReplaceAll, rfIgnoreCase]);
+  vsTxt := StringReplace(vsTxt, '.','', [rfReplaceAll, rfIgnoreCase]);
+  vsTxt := StringReplace(vsTxt, '/','', [rfReplaceAll, rfIgnoreCase]);
+
 end;
 
 //******************************************************************************

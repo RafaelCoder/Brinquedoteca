@@ -28,6 +28,7 @@ type
   function fGetContentFile(caminho:String):String;
   function fGetValues(ovp:TPanel):TStringList;
 
+
 implementation
 
 function  f_MsgConfirma( Msg: string ): Boolean;

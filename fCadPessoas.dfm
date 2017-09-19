@@ -1,6 +1,6 @@
 inherited ovF_CadPessoas: TovF_CadPessoas
-  Left = 428
-  Top = 394
+  Left = 642
+  Top = 416
   Caption = 'Clientes'
   ClientHeight = 352
   ClientWidth = 719
@@ -202,12 +202,6 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Columns = <
             item
               Expanded = False
-              FieldName = 'Dep_Codigo'
-              Title.Caption = 'C'#243'digo'
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'Pes_Nome'
               Title.Caption = 'Nome'
               Width = 354
@@ -229,6 +223,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           AutoSize = False
           DecimalPlaces = 0
           DisplayFormat = '0'
+          Enabled = False
           ButtonWidth = 0
           NumGlyphs = 2
           TabOrder = 1
