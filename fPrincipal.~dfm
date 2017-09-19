@@ -23,7 +23,7 @@ object ovF_Principal: TovF_Principal
     object Cadastros1: TMenuItem
       Caption = 'Cadastros'
       object Alunos1: TMenuItem
-        Caption = 'Alunos'
+        Caption = 'Clientes'
         OnClick = Alunos1Click
       end
     end

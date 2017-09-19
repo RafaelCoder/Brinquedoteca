@@ -21,7 +21,7 @@ type
 
 var
   ovF_Principal: TovF_Principal;
-implementation
+
 
 {$R *.dfm}
 

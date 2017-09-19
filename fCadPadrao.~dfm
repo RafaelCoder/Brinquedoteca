@@ -46,20 +46,29 @@ object ovF_CadPadrao: TovF_CadPadrao
     end
     object ovB_Pesquisar: TButton
       Left = 0
-      Top = 50
-      Width = 100
-      Height = 25
-      Caption = '&Pesquisar'
-      TabOrder = 2
-    end
-    object ovB_Sair: TButton
-      Left = 0
       Top = 75
       Width = 100
       Height = 25
-      Caption = '&Sair'
+      Caption = '&Pesquisar'
       TabOrder = 3
+    end
+    object ovB_Sair: TButton
+      Left = 0
+      Top = 100
+      Width = 100
+      Height = 25
+      Caption = '&Sair'
+      TabOrder = 4
       OnClick = ovB_SairClick
+    end
+    object ovB_Excluir: TButton
+      Left = 0
+      Top = 50
+      Width = 100
+      Height = 25
+      Caption = '&Excluir'
+      TabOrder = 2
+      OnClick = ovB_ExcluirClick
     end
   end
   object ovP_Container: TPanel

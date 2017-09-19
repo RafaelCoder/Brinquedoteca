@@ -1,4 +1,8 @@
 inherited ovF_PsqPessoas: TovF_PsqPessoas
+  Left = 603
+  Top = 438
+  Width = 939
+  Height = 377
   Caption = 'Pesquisa de pessoas'
   OldCreateOrder = True
   PixelsPerInch = 96
@@ -18,11 +22,13 @@ inherited ovF_PsqPessoas: TovF_PsqPessoas
     Caption = 'Nome'
   end
   inherited Panel1: TPanel
-    inherited ovB_Atualizar: TButton
-      OnClick = ovB_AtualizarClick
-    end
+    Left = 783
+    Height = 338
   end
   inherited ovDBG_Pesquisa: TDBGrid
+    Top = 48
+    Width = 779
+    Height = 290
     Columns = <
       item
         Expanded = False

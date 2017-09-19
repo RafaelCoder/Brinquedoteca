@@ -61,6 +61,8 @@ begin
   Result := false;
   if length(arrVal) <= 0 then
     Exit;
+  if arrVal[0] = '' then
+    Exit;
   ExecSQL(vsSELECT+' WHERE C.Cli_Codigo = '+arrVal[0], oCDS_Pesquisa);
   Result := not oCDS_Pesquisa.IsEmpty;
 end;

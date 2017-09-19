@@ -14,10 +14,12 @@ type
     ovB_Cancelar: TButton;
     ovB_Pesquisar: TButton;
     ovB_Sair: TButton;
+    ovB_Excluir: TButton;
     procedure ovB_SairClick(Sender: TObject);
     procedure ovB_ConfirmarClick(Sender: TObject);
     procedure ovB_CancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ovB_ExcluirClick(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -26,6 +28,7 @@ type
     procedure pNovo; virtual; abstract;
     procedure pLimparCampos; virtual; abstract;
     procedure pCarregaDados; virtual; abstract;
+    procedure pExcluir; virtual; abstract;
   public
 
   end;
@@ -64,6 +67,14 @@ end;
 //******************************************************************************
 procedure TovF_CadPadrao.FormShow(Sender: TObject);
 begin
+  pNovo;
+end;
+
+//******************************************************************************
+procedure TovF_CadPadrao.ovB_ExcluirClick(Sender: TObject);
+begin
+  pExcluir;
+  pLimparCampos;
   pNovo;
 end;
 

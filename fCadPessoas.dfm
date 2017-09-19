@@ -7,11 +7,13 @@ inherited ovF_CadPessoas: TovF_CadPessoas
   OldCreateOrder = True
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnl1: TPanel
     Left = 618
     Height = 352
+    TabOrder = 1
     inherited ovB_Pesquisar: TButton
       OnClick = ovB_PesquisarClick
     end
@@ -19,12 +21,13 @@ inherited ovF_CadPessoas: TovF_CadPessoas
   inherited ovP_Container: TPanel
     Width = 618
     Height = 352
+    TabOrder = 0
     object ovPC_Container: TPageControl
       Left = 1
       Top = 1
       Width = 616
       Height = 350
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet
@@ -35,7 +38,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Width = 608
           Height = 280
           Align = alClient
-          TabOrder = 0
+          TabOrder = 1
           object Label4: TLabel
             Left = 10
             Top = 2
@@ -124,7 +127,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Width = 608
           Height = 42
           Align = alTop
-          TabOrder = 1
+          TabOrder = 0
           object Label1: TLabel
             Left = 10
             Top = 7
@@ -193,12 +196,13 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Align = alBottom
           DataSource = oDS_Dependentes
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
+          TabOrder = 5
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDblClick = DBGrid1DblClick
           Columns = <
             item
               Expanded = False
@@ -226,14 +230,14 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Enabled = False
           ButtonWidth = 0
           NumGlyphs = 2
-          TabOrder = 1
+          TabOrder = 0
         end
         object ovE_DepNome: TEdit
           Left = 125
           Top = 22
           Width = 375
           Height = 21
-          TabOrder = 2
+          TabOrder = 1
         end
         object ovDE_DepDataNascimento: TDateEdit
           Left = 125
@@ -241,7 +245,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Width = 121
           Height = 21
           NumGlyphs = 2
-          TabOrder = 3
+          TabOrder = 2
         end
         object ovB_DepAdicionar: TButton
           Left = 168
@@ -249,7 +253,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Width = 75
           Height = 25
           Caption = 'Adicionar'
-          TabOrder = 4
+          TabOrder = 3
           OnClick = ovB_DepAdicionarClick
         end
         object ovB_DepRemover: TButton
@@ -258,7 +262,8 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Width = 75
           Height = 25
           Caption = 'Remover'
-          TabOrder = 5
+          TabOrder = 4
+          OnClick = ovB_DepRemoverClick
         end
       end
     end

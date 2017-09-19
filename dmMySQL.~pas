@@ -167,13 +167,15 @@ end;
 //******************************************************************************
 procedure DBCommit;
 begin
-
+  if not odm_MySQL.ZConnection.InTransaction then
+    odm_MySQL.ZConnection.Commit;
 end;
 
 //******************************************************************************
 procedure DBRollBack;
 begin
-
+  if not odm_MySQL.ZConnection.InTransaction then
+    odm_MySQL.ZConnection.Rollback;
 end;
 
 //******************************************************************************

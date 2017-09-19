@@ -167,7 +167,7 @@ end;
 //******************************************************************************
 procedure DBCommit;
 begin
-  if not odm_MySQL.ZConnection.InTransaction then
+  if odm_MySQL.ZConnection.InTransaction then
     odm_MySQL.ZConnection.Commit;
 end;
 
