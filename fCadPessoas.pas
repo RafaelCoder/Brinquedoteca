@@ -123,17 +123,19 @@ begin
     Exit;
   end;
 
-  if not vbEditando then
+  vsSQL := 'SELECT Pes_Codigo FROM Clientes WHERE Cli_Codigo = '+ovCE_Codigo.Text;
+  ExecSQL(vsSQL, oCDS);
+  vsSQL := ' SELECT Pes_Codigo FROM Pessoas WHERE Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text);
+  if not oCDS.IsEmpty then
+    vsSQL := vsSQL + ' AND Pes_Codigo <> '+oCDS.FieldByName('Pes_Codigo').AsString;
+  ExecSQL(vsSQL, oCDS);
+  if not oCDS.IsEmpty then
   begin
-    vsSQL := ' SELECT Pes_Codigo FROM Pessoas WHERE Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text);
-    ExecSQL(vsSQL, oCDS);
-    if not oCDS.IsEmpty then
-    begin
-      p_MsgAviso('Já existe um cliente cadastrado com este CPF');
-      Result := false;
-      exit;
-    end;
+    p_MsgAviso('Já existe um cliente cadastrado com este CPF');
+    Result := false;
+    exit;
   end;
+
 end;
 
 //******************************************************************************
@@ -171,6 +173,14 @@ begin
     Exit;
   try
     DBBeginTrans;
+    vsSQL := 'DELETE FROM Dependentes WHERE Cli_Codigo = '+ovCE_Codigo.Text;
+    ExecSQL(vsSQL);
+    vsSQL := 'SELECT Pes_Codigo FROM Clientes WHERE Cli_Codigo = '+ovCE_Codigo.Text;
+    ExecSQL(vsSQL, oCDS);
+    vsSQL := 'DELETE FROM Clientes WHERE Cli_Codigo = '+ovCE_Codigo.Text;
+    ExecSQL(vsSQL);
+    vsSQL := 'DELETE FROM Pessoas WHERE Pes_Codigo = '+oCDS.FieldByName('Pes_Codigo').AsString;
+    ExecSQL(vsSQL);
     DBCommit;
   except
     on E : Exception do
