@@ -9,7 +9,8 @@ uses
   uGeral in 'uGeral.pas',
   uControllerPessoas in 'uControllerPessoas.pas' {ControllerPessoas: TDataModule},
   uDAOPessoas in 'uDAOPessoas.pas' {DAOPessoas: TDataModule},
-  fPsqPadrao in 'fPsqPadrao.pas' {ovF_PsqPadrao};
+  fPsqPadrao in 'fPsqPadrao.pas' {ovF_PsqPadrao},
+  fPsqPessoas in 'fPsqPessoas.pas' {ovF_PsqPessoas};
 
 {$R *.res}
 

@@ -29,6 +29,16 @@ object ovF_Principal: TovF_Principal
     end
     object Lanamentos1: TMenuItem
       Caption = 'Lan'#231'amentos'
+      object Entradadealuno1: TMenuItem
+        Caption = 'Entrada de aluno'
+        OnClick = Entradadealuno1Click
+      end
+      object Saidadealuno1: TMenuItem
+        Caption = 'Saida de aluno'
+      end
+    end
+    object Pesquisa1: TMenuItem
+      Caption = 'Pesquisa'
     end
   end
 end
