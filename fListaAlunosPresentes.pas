@@ -30,7 +30,7 @@ implementation
 //******************************************************************************
 procedure TovF_ListaAlunosPresentes.FormCreate(Sender: TObject);
 begin
-  oCDS_Alunos.CreateDataSet;
+  //oCDS_Alunos.CreateDataSet;
 end;
 
 //******************************************************************************

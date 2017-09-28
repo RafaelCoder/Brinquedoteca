@@ -40,7 +40,9 @@ end;
 //******************************************************************************
 procedure TovF_Principal.Entradadealuno1Click(Sender: TObject);
 begin
-  
+  if ovF_LanEntradaAluno = nil then
+    ovF_LanEntradaAluno := TovF_LanEntradaAluno.Create(Self);
+  ovF_LanEntradaAluno.Show;
 end;
 
 //******************************************************************************

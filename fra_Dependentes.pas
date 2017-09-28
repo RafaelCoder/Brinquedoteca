@@ -8,7 +8,7 @@ uses
 
 type
   TFrame1 = class(TFrame)
-    RxCalcEdit1: TRxCalcEdit;
+    ovCE_Codigo: TRxCalcEdit;
   private
     { Private declarations }
   public
