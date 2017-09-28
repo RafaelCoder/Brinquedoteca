@@ -1,5 +1,16 @@
 inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
   Caption = 'ovF_LanEntradaAluno'
+  OldCreateOrder = True
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
+  inherited ovP_Container: TPanel
+    inline ovFra_Dependentes1: TovFra_Dependentes
+      Left = 16
+      Top = 14
+      Width = 366
+      Height = 22
+      TabOrder = 0
+    end
+  end
 end

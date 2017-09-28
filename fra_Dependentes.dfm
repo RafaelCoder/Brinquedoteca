@@ -1,13 +1,13 @@
-object Frame1: TFrame1
+object ovFra_Dependentes: TovFra_Dependentes
   Left = 0
   Top = 0
-  Width = 577
-  Height = 71
+  Width = 366
+  Height = 22
   TabOrder = 0
   object ovCE_Codigo: TRxCalcEdit
     Left = 0
     Top = 0
-    Width = 121
+    Width = 95
     Height = 21
     AutoSize = False
     GlyphKind = gkCustom
@@ -34,5 +34,13 @@ object Frame1: TFrame1
       0000000000000000000000000000000000000000000000000000}
     NumGlyphs = 1
     TabOrder = 0
+  end
+  object ovP_Descricao: TPanel
+    Left = 104
+    Top = 0
+    Width = 254
+    Height = 21
+    Alignment = taLeftJustify
+    TabOrder = 1
   end
 end

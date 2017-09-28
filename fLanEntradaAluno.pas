@@ -4,10 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, fCadPadrao, StdCtrls, ExtCtrls;
+  Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes;
 
 type
   TovF_LanEntradaAluno = class(TovF_CadPadrao)
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   protected
@@ -64,6 +65,15 @@ end;
 procedure TovF_LanEntradaAluno.pNovo;
 begin
 
+end;
+
+//******************************************************************************
+procedure TovF_LanEntradaAluno.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := caFree;
+  Release;
+  ovF_LanEntradaAluno := nil;
 end;
 
 //******************************************************************************
