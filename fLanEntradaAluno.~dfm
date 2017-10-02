@@ -1,15 +1,20 @@
 inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
   Caption = 'ovF_LanEntradaAluno'
+  ClientWidth = 641
   OldCreateOrder = True
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
+  inherited pnl1: TPanel
+    Left = 540
+  end
   inherited ovP_Container: TPanel
+    Width = 540
     inline ovFra_Dependentes1: TovFra_Dependentes
-      Left = 16
-      Top = 14
-      Width = 366
-      Height = 22
+      Left = 0
+      Top = 0
+      Width = 475
+      Height = 51
       TabOrder = 0
     end
   end

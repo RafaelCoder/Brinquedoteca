@@ -4,10 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes;
+  Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes, ComCtrls;
 
 type
   TovF_LanEntradaAluno = class(TovF_CadPadrao)
+    ovFra_Dependentes1: TovFra_Dependentes;
+    DateTimePicker1: TDateTimePicker;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
