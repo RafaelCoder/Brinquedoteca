@@ -39,8 +39,8 @@ begin
   if ovCE_Codigo.Text <> '' then
     vsWHERE := vsWHERE + ' AND C.Cli_Codigo = '+ovCE_Codigo.Text;
 
-  if ovCE_Codigo.Text <> '' then
-    vsWHERE := vsWHERE + ' AND P.Pes_Nome LIKE "%'+Trim(ovCE_Codigo.Text)+'%"';
+  if ovE_Nome.Text <> '' then
+    vsWHERE := vsWHERE + ' AND P.Pes_Nome LIKE "%'+Trim(ovE_Nome.Text)+'%"';
   inherited;
 end;
 

@@ -1,6 +1,6 @@
 inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
-  Caption = 'ovF_LanEntradaAluno'
-  ClientHeight = 161
+  Caption = 'Entrada alunos'
+  ClientHeight = 134
   ClientWidth = 641
   OldCreateOrder = True
   OnClose = FormClose
@@ -8,11 +8,23 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
   TextHeight = 13
   inherited pnl1: TPanel
     Left = 540
-    Height = 161
+    Height = 134
+    inherited ovB_Pesquisar: TButton
+      Left = 8
+      Top = 109
+      Visible = False
+    end
+    inherited ovB_Sair: TButton
+      Top = 50
+    end
+    inherited ovB_Excluir: TButton
+      Top = 85
+      Visible = False
+    end
   end
   inherited ovP_Container: TPanel
     Width = 540
-    Height = 161
+    Height = 134
     inline ovFra_Dependentes1: TovFra_Dependentes
       Left = 0
       Top = 0
@@ -20,14 +32,11 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
       Height = 51
       TabOrder = 0
     end
-    object DateTimePicker1: TDateTimePicker
-      Left = 126
-      Top = 45
-      Width = 186
-      Height = 21
-      Date = 43010.762192280090000000
-      Time = 43010.762192280090000000
-      TabOrder = 1
+    object ovC_Hora: TRxClock
+      Left = 127
+      Top = 47
+      Width = 176
+      Height = 33
     end
   end
 end

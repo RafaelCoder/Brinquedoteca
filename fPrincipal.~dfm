@@ -29,16 +29,20 @@ object ovF_Principal: TovF_Principal
     end
     object Lanamentos1: TMenuItem
       Caption = 'Lan'#231'amentos'
+      Visible = False
       object Entradadealuno1: TMenuItem
         Caption = 'Entrada de aluno'
+        Visible = False
         OnClick = Entradadealuno1Click
       end
       object Saidadealuno1: TMenuItem
         Caption = 'Saida de aluno'
+        Visible = False
       end
     end
     object Pesquisa1: TMenuItem
       Caption = 'Pesquisa'
+      Visible = False
     end
   end
 end

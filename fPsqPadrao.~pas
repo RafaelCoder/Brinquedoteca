@@ -21,7 +21,7 @@ type
   private
     { Private declarations }
   public
-    function fConsulta(arrVal : array of string):string; virtual; abstract;
+    function fConsulta(arrVal : array of string):boolean; virtual; abstract;
   end;
 
 var

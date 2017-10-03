@@ -39,6 +39,7 @@ object ovF_Principal: TovF_Principal
     end
     object Pesquisa1: TMenuItem
       Caption = 'Pesquisa'
+      Visible = False
     end
   end
 end

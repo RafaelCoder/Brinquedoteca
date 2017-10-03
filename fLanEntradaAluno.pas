@@ -4,12 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes, ComCtrls;
+  Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes, ComCtrls,
+  RXClock, dmMySQL, uGeral;
 
 type
   TovF_LanEntradaAluno = class(TovF_CadPadrao)
     ovFra_Dependentes1: TovFra_Dependentes;
-    DateTimePicker1: TDateTimePicker;
+    ovC_Hora: TRxClock;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
@@ -36,7 +37,12 @@ implementation
 //******************************************************************************
 function TovF_LanEntradaAluno.fValidaCampos: Boolean;
 begin
-
+  Result := True;
+  if Trim(ovFra_Dependentes1.ovCE_DepCodigo.Text) = '' then
+  begin
+    p_MsgAviso('Necessário informar um aluno');
+    Result :=False
+  end;
 end;
 
 //******************************************************************************
@@ -54,7 +60,16 @@ end;
 //******************************************************************************
 procedure TovF_LanEntradaAluno.pGravar;
 begin
-
+  try
+    DBBeginTrans;
+    DBCommit;
+  except
+    on E : Exception do
+    begin
+      DBRollBack;
+      p_MsgAviso(E.Message);
+    end;
+  end;
 end;
 
 //******************************************************************************

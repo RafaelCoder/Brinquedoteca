@@ -13,7 +13,8 @@ uses
   fPsqPessoas in 'fPsqPessoas.pas' {ovF_PsqPessoas},
   fLanEntradaAluno in 'fLanEntradaAluno.pas' {ovF_LanEntradaAluno},
   fListaAlunosPresentes in 'fListaAlunosPresentes.pas' {ovF_ListaAlunosPresentes},
-  fra_Dependentes in 'fra_Dependentes.pas' {ovFra_Dependentes: TFrame};
+  fra_Dependentes in 'fra_Dependentes.pas' {ovFra_Dependentes: TFrame},
+  fPsqDependentes in 'fPsqDependentes.pas' {ovF_PsqDependentes};
 
 {$R *.res}
 

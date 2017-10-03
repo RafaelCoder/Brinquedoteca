@@ -1,6 +1,6 @@
 inherited ovF_PsqPessoas: TovF_PsqPessoas
-  Left = 603
-  Top = 438
+  Left = 508
+  Top = 299
   Width = 939
   Height = 377
   Caption = 'Pesquisa de pessoas'

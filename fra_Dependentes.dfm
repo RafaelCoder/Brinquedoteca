@@ -7,16 +7,16 @@ object ovFra_Dependentes: TovFra_Dependentes
   object Label1: TLabel
     Left = 10
     Top = 5
-    Width = 32
+    Width = 62
     Height = 13
-    Caption = 'Cliente'
+    Caption = 'Respons'#225'vel'
   end
   object Label2: TLabel
     Left = 10
     Top = 27
-    Width = 27
+    Width = 59
     Height = 13
-    Caption = 'Aluno'
+    Caption = 'Dependente'
   end
   object ovCE_CliCodigo: TRxCalcEdit
     Left = 125
@@ -92,6 +92,7 @@ object ovFra_Dependentes: TovFra_Dependentes
     NumGlyphs = 1
     TabOrder = 2
     OnButtonClick = ovCE_DepCodigoButtonClick
+    OnExit = ovCE_DepCodigoExit
   end
   object ovP_DepDescricao: TPanel
     Left = 221
