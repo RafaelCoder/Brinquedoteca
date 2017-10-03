@@ -38,9 +38,20 @@ implementation
 function TovF_LanEntradaAluno.fValidaCampos: Boolean;
 begin
   Result := True;
+  if Trim(ovFra_Dependentes1.ovCE_CliCodigo.Text) = '' then
+  begin
+    p_MsgAviso('Necessário informar um responsável.');
+    Result := False;
+    ovFra_Dependentes1.ovCE_CliCodigo.SetFocus;
+    Exit;
+  end;
+
   if Trim(ovFra_Dependentes1.ovCE_DepCodigo.Text) = '' then
   begin
-    p_MsgAviso('Necessário informar um aluno');
+    p_MsgAviso('Necessário informar um dependente.');
+    Result := False;
+    ovFra_Dependentes1.ovCE_DepCodigo.SetFocus;
+    Exit;
   end;
 end;
 
@@ -58,9 +69,18 @@ end;
 
 //******************************************************************************
 procedure TovF_LanEntradaAluno.pGravar;
+var
+  Lan_Codigo : String;
 begin
   try
     DBBeginTrans;
+    Lan_Codigo := IntToStr(f_GetProxCodigo('Lancamentos', 'Lan_Codigo', '')); 
+    vsSQL := ' INSERT INTO Lancamentos SET Lan_Codigo = '+Lan_Codigo+
+             ' , Cli_Codigo = '+ f_StrToSQL(ovFra_Dependentes1.ovCE_CliCodigo.Text)+
+             ' , Dep_Codigo = '+ f_StrToSQL(ovFra_Dependentes1.ovCE_DepCodigo.Text)+
+             ' , Lan_DataHoraEnt = '+f_DateToSQL(Now())+
+             ' , Lan_Fehcado = "N"';
+    ExecSQL(vsSQL)
     DBCommit;
   except
     on E : Exception do
