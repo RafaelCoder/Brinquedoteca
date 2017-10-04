@@ -1,5 +1,5 @@
 inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
-  Caption = 'Entrada alunos'
+  Caption = 'Entrada aluno'
   ClientHeight = 87
   ClientWidth = 574
   OldCreateOrder = True

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, DB, DBClient, dmMySQL, uGeral, fCadPessoas, fLanEntradaAluno,
-  fLanSaidaAluno, fLanFechamento;
+  fLanSaidaAluno, fLanFechamento, fPsqLancamentos;
 
 type
   TovF_Principal = class(TForm)
@@ -19,11 +19,13 @@ type
     Alunospresentes1: TMenuItem;
     Relatrios1: TMenuItem;
     Fechamento1: TMenuItem;
+    Lanamentos2: TMenuItem;
     procedure Alunos1Click(Sender: TObject);
     procedure Entradadealuno1Click(Sender: TObject);
     procedure Alunospresentes1Click(Sender: TObject);
     procedure Saidadealuno1Click(Sender: TObject);
     procedure Fechamento1Click(Sender: TObject);
+    procedure Lanamentos2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -76,6 +78,18 @@ begin
   if ovF_LanFechamento = nil then
     ovF_LanFechamento := TovF_LanFechamento.Create(Self);
   ovF_LanFechamento.Show;
+end;
+
+//******************************************************************************
+procedure TovF_Principal.Lanamentos2Click(Sender: TObject);
+begin
+  try
+    if ovF_PsqLancamentos = nil then
+      ovF_PsqLancamentos := TovF_PsqLancamentos.Create(Self);
+    ovF_PsqLancamentos.ShowModal;
+  finally
+    FreeAndNil(ovF_PsqLancamentos);
+  end;
 end;
 
 //******************************************************************************

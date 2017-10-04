@@ -28,7 +28,7 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
     Height = 87
     object Label1: TLabel
       Left = 12
-      Top = 49
+      Top = 46
       Width = 62
       Height = 13
       Caption = 'Hora entrada'
@@ -37,12 +37,12 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
       Left = 0
       Top = 0
       Width = 475
-      Height = 51
+      Height = 43
       TabOrder = 0
     end
     object ovDTP_HoraEntrada: TDateTimePicker
       Left = 125
-      Top = 46
+      Top = 43
       Width = 94
       Height = 21
       Date = 43012.209260486110000000
@@ -52,7 +52,7 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
     end
     object Button1: TButton
       Left = 220
-      Top = 48
+      Top = 45
       Width = 75
       Height = 18
       Caption = 'Atualizar'

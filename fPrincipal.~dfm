@@ -48,6 +48,10 @@ object ovF_Principal: TovF_Principal
         Caption = 'Alunos presentes'
         OnClick = Alunospresentes1Click
       end
+      object Lanamentos2: TMenuItem
+        Caption = 'Lan'#231'amentos'
+        OnClick = Lanamentos2Click
+      end
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios'
