@@ -102,7 +102,7 @@ begin
   try
     Lan_Codigo := oCDS_Aluno.FieldByName('Lan_Codigo').AsString;
     DBBeginTrans;
-    vsSQL := ' UPDATE Lancamentos SET Lan_DataHoraSai = '+f_DateToSQL(Now())+
+    vsSQL := ' UPDATE Lancamentos SET Lan_DataHoraSai = '+f_StrToSQL(FormatDateTime('yyyy-mm-dd', Date)+' '+TimeToStr(ovDTP_HoraSaida.Time))+
              ' WHERE Lan_Codigo = '+Lan_Codigo;
     ExecSQL(vsSQL);
     DBCommit;
