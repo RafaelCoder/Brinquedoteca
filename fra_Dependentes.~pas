@@ -21,7 +21,7 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    procedure p_Limpar;
   end;
 
 implementation
@@ -100,7 +100,7 @@ begin
   try
     if ovF_PsqDependentes = nil then
       ovF_PsqDependentes := TovF_PsqDependentes.Create(Self);
-    if ovF_PsqDependentes.fConsulta([ovCE_CliCodigo.Text]) then
+    if ovF_PsqDependentes.fConsulta([ovCE_CliCodigo.Text, ovCE_DepCodigo.Text]) then
     begin
       ovCE_CliCodigo.Text := ovF_PsqDependentes.oCDS_Pesquisa.FieldByname('Cli_Codigo').AsString;
       ovCE_DepCodigo.Text := ovF_PsqDependentes.oCDS_Pesquisa.FieldByname('Dep_Codigo').AsString;
@@ -116,6 +116,15 @@ begin
   finally
     FreeAndNil(ovF_PsqDependentes);
   end;
+end;
+
+//******************************************************************************
+procedure TovFra_Dependentes.p_Limpar;
+begin
+  ovCE_CliCodigo.Clear;
+  ovP_CliDescricao.Caption := '';
+  ovCE_DepCodigo.Clear;
+  ovP_DepDescricao.Caption := '';
 end;
 
 //******************************************************************************

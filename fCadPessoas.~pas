@@ -49,6 +49,7 @@ type
     procedure ovB_DepRemoverClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure ovE_NomeExit(Sender: TObject);
   private
     vbEditando : Boolean;
     oCDS : TClientDataSet;
@@ -127,8 +128,7 @@ begin
   ExecSQL(vsSQL, oCDS);
   vsSQL := ' SELECT Pes_Codigo FROM Pessoas WHERE Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text);
   if not oCDS.IsEmpty then
-    vsSQL := vsSQL + ' AND Pes_Codigo <> '+oCDS.FieldByName('Pes_Codigo').AsString+
-           ;
+    vsSQL := vsSQL + ' AND Pes_Codigo <> '+oCDS.FieldByName('Pes_Codigo').AsString;
   ExecSQL(vsSQL, oCDS);
   if not oCDS.IsEmpty then
   begin
@@ -401,6 +401,12 @@ end;
 procedure TovF_CadPessoas.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(oCDS);
+end;
+
+//******************************************************************************
+procedure TovF_CadPessoas.ovE_NomeExit(Sender: TObject);
+begin
+  ovE_Nome.Text := UpperCase(ovE_Nome.Text);
 end;
 
 //******************************************************************************

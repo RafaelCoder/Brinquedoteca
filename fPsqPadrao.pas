@@ -26,7 +26,7 @@ type
 
 var
   ovF_PsqPadrao: TovF_PsqPadrao;
-  vsSELECT, vsWHERE, vsORDERBY : String;
+  vsSELECT, vsWHERE, vsORDERBY, vsFILTER : String;
 
 implementation
 
@@ -39,6 +39,7 @@ begin
   vsSELECT  := '';
   vsWHERE   := '';
   vsORDERBY := '';
+  vsFILTER  := '';
 end;
 
 //******************************************************************************

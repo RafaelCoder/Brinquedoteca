@@ -99,7 +99,7 @@ begin
    Result := 'NULL';
    if Data <> 0 then
    begin
-     Result := #39 + FormatDateTime('yyyymmdd hh:mm:ss', Data) + #39
+     Result := #39 + FormatDateTime('yyyy-mm-dd hh:mm:ss', Data) + #39
    end;
 end;
 //******************************************************************************

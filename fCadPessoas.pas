@@ -49,6 +49,8 @@ type
     procedure ovB_DepRemoverClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure ovE_NomeExit(Sender: TObject);
+    procedure ovE_DepNomeExit(Sender: TObject);
   private
     vbEditando : Boolean;
     oCDS : TClientDataSet;
@@ -403,4 +405,16 @@ begin
 end;
 
 //******************************************************************************
+procedure TovF_CadPessoas.ovE_NomeExit(Sender: TObject);
+begin
+  ovE_Nome.Text := UpperCase(ovE_Nome.Text);
+end;
+
+//******************************************************************************
+procedure TovF_CadPessoas.ovE_DepNomeExit(Sender: TObject);
+begin
+  inherited;
+    ovE_DepNome.Text := UpperCase(ovE_DepNome.Text);
+end;
+
 end.

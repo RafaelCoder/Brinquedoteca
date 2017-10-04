@@ -21,7 +21,7 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    procedure p_Limpar;
   end;
 
 implementation
@@ -116,6 +116,15 @@ begin
   finally
     FreeAndNil(ovF_PsqDependentes);
   end;
+end;
+
+//******************************************************************************
+procedure TovFra_Dependentes.p_Limpar;
+begin
+  ovCE_CliCodigo.Clear;
+  ovP_CliDescricao.Caption := '';
+  ovCE_DepCodigo.Clear;
+  ovP_DepDescricao.Caption := '';
 end;
 
 //******************************************************************************

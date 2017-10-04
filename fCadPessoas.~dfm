@@ -161,6 +161,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
             Width = 375
             Height = 21
             TabOrder = 1
+            OnExit = ovE_NomeExit
           end
         end
       end

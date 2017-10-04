@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes, ComCtrls,
-  RXClock, dmMySQL, uGeral;
+  RXClock, dmMySQL, uGeral, DB, DBClient;
 
 type
   TovF_LanEntradaAluno = class(TovF_CadPadrao)
@@ -36,22 +36,39 @@ implementation
 
 //******************************************************************************
 function TovF_LanEntradaAluno.fValidaCampos: Boolean;
+var
+  oCDS : TClientDataSet;
 begin
+  oCDS := TClientDataSet.Create(self);
   Result := True;
-  if Trim(ovFra_Dependentes1.ovCE_CliCodigo.Text) = '' then
-  begin
-    p_MsgAviso('Necessário informar um responsável.');
-    Result := False;
-    ovFra_Dependentes1.ovCE_CliCodigo.SetFocus;
-    Exit;
-  end;
+  try
+    if Trim(ovFra_Dependentes1.ovCE_CliCodigo.Text) = '' then
+    begin
+      p_MsgAviso('Necessário informar um responsável.');
+      Result := False;
+      ovFra_Dependentes1.ovCE_CliCodigo.SetFocus;
+      Exit;
+    end;
 
-  if Trim(ovFra_Dependentes1.ovCE_DepCodigo.Text) = '' then
-  begin
-    p_MsgAviso('Necessário informar um dependente.');
-    Result := False;
-    ovFra_Dependentes1.ovCE_DepCodigo.SetFocus;
-    Exit;
+    if Trim(ovFra_Dependentes1.ovCE_DepCodigo.Text) = '' then
+    begin
+      p_MsgAviso('Necessário informar um dependente.');
+      Result := False;
+      ovFra_Dependentes1.ovCE_DepCodigo.SetFocus;
+      Exit;
+    end;
+
+    vsSQL := ' SELECT * FROM Lancamentos WHERE Dep_Codigo = '+ovFra_Dependentes1.ovCE_DepCodigo.Text+
+             ' AND Cli_Codigo = '+ovFra_Dependentes1.ovCE_CliCodigo.Text+
+             ' AND Lan_DataHoraSai IS NULL';
+    ExecSQL(vsSQL, oCDS);
+    if not oCDS.IsEmpty then
+    begin
+      Result := false;
+      exit;
+    end;
+  finally
+    FreeAndNil(oCDS);
   end;
 end;
 
@@ -79,8 +96,8 @@ begin
              ' , Cli_Codigo = '+ f_StrToSQL(ovFra_Dependentes1.ovCE_CliCodigo.Text)+
              ' , Dep_Codigo = '+ f_StrToSQL(ovFra_Dependentes1.ovCE_DepCodigo.Text)+
              ' , Lan_DataHoraEnt = '+f_DateToSQL(Now())+
-             ' , Lan_Fehcado = "N"';
-    ExecSQL(vsSQL)
+             ' , Lan_Fechado = "N"';
+    ExecSQL(vsSQL);
     DBCommit;
   except
     on E : Exception do
@@ -94,7 +111,8 @@ end;
 //******************************************************************************
 procedure TovF_LanEntradaAluno.pLimparCampos;
 begin
-
+  ovFra_Dependentes1.p_Limpar;
+  ovFra_Dependentes1.ovCE_CliCodigo.SetFocus;
 end;
 
 //******************************************************************************
