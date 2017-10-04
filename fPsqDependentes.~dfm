@@ -2,6 +2,7 @@ inherited ovF_PsqDependentes: TovF_PsqDependentes
   Top = 282
   Height = 533
   Caption = 'Pesquisa de dependentes'
+  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]

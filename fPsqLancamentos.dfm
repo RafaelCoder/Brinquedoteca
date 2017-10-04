@@ -1,5 +1,7 @@
 inherited ovF_PsqLancamentos: TovF_PsqLancamentos
+  Width = 1327
   Caption = 'Pesquisa de lan'#231'amentos'
+  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
@@ -16,8 +18,12 @@ inherited ovF_PsqLancamentos: TovF_PsqLancamentos
     Height = 13
     Caption = 'At'#233
   end
+  inherited Panel1: TPanel
+    Left = 1171
+  end
   inherited ovDBG_Pesquisa: TDBGrid
     Top = 72
+    Width = 1167
     Height = 568
     Columns = <
       item
@@ -37,6 +43,12 @@ inherited ovF_PsqLancamentos: TovF_PsqLancamentos
         FieldName = 'Responsavel'
         Title.Caption = 'Respons'#225'vel'
         Width = 283
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Lan_Data'
+        Title.Caption = 'Data'
         Visible = True
       end
       item
@@ -118,6 +130,9 @@ inherited ovF_PsqLancamentos: TovF_PsqLancamentos
     object oCDS_PesquisaResponsavel: TStringField
       FieldName = 'Responsavel'
       Size = 100
+    end
+    object oCDS_PesquisaLan_Data: TDateField
+      FieldName = 'Lan_Data'
     end
     object oCDS_PesquisaLan_DataHoraEnt: TDateTimeField
       FieldName = 'Lan_DataHoraEnt'

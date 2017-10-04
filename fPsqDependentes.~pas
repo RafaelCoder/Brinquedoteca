@@ -49,6 +49,8 @@ begin
   vsWHERE := '1=1';
   if ovE_DepNome.Text <> '' then
     vsWHERE := vsWHERE + ' AND PD.Pes_Nome LIKE "%'+Trim(ovE_DepNome.Text)+'%"';
+  if Trim(vsFILTER) <> '' then
+    vsWHERE := vsWHERE+' '+vsFILTER; 
   inherited;
 end;
 

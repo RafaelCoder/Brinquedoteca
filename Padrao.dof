@@ -90,8 +90,8 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=C:\Projetos\Padrao\Exec
-UnitOutputDir=C:\Projetos\Padrao\Compilados
+OutputDir=C:\git\Brinquedoteca\Exec
+UnitOutputDir=C:\git\Brinquedoteca\Compilados
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
@@ -138,8 +138,10 @@ Comments=
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlUnitOutputDirectory]
-Count=1
-Item0=C:\Projetos\Padrao\Compilados
+Count=2
+Item0=C:\git\Brinquedoteca\Compilados
+Item1=C:\Projetos\Padrao\Compilados
 [HistoryLists\hlOutputDirectorry]
-Count=1
-Item0=C:\Projetos\Padrao\Exec
+Count=2
+Item0=C:\git\Brinquedoteca\Exec
+Item1=C:\Projetos\Padrao\Exec

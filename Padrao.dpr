@@ -15,7 +15,8 @@ uses
   fPsqDependentes in 'fPsqDependentes.pas' {ovF_PsqDependentes},
   fLanSaidaAluno in 'fLanSaidaAluno.pas' {ovF_LanSaidaAluno},
   fLanFechamento in 'fLanFechamento.pas' {ovF_LanFechamento},
-  fPsqLancamentos in 'fPsqLancamentos.pas' {ovF_PsqLancamentos};
+  fPsqLancamentos in 'fPsqLancamentos.pas' {ovF_PsqLancamentos},
+  fra_Lancamentos in 'fra_Lancamentos.pas' {ovFra_Lancamentos: TFrame};
 
 {$R *.res}
 

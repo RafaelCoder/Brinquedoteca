@@ -21,12 +21,13 @@ type
   private
     { Private declarations }
   public
+    vsSELECT, vsWHERE, vsORDERBY, vsFILTER : String;
     function fConsulta(arrVal : array of string):boolean; virtual; abstract;
   end;
 
 var
   ovF_PsqPadrao: TovF_PsqPadrao;
-  vsSELECT, vsWHERE, vsORDERBY, vsFILTER : String;
+
 
 implementation
 
