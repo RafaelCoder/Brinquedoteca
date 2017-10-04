@@ -3,7 +3,7 @@ object ovF_ListaAlunosPresentes: TovF_ListaAlunosPresentes
   Top = 136
   Width = 1305
   Height = 675
-  BorderIcons = [biMaximize]
+  BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Alunos presentes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,7 +13,7 @@ object ovF_ListaAlunosPresentes: TovF_ListaAlunosPresentes
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poMainFormCenter
   Visible = True
   WindowState = wsMaximized
   OnClose = FormClose
@@ -64,7 +64,7 @@ object ovF_ListaAlunosPresentes: TovF_ListaAlunosPresentes
       DataSource = oDS_Alunos
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -20
+      Font.Height = -27
       Font.Name = 'Consolas'
       Font.Style = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]

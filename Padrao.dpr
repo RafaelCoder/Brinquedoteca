@@ -12,7 +12,9 @@ uses
   fLanEntradaAluno in 'fLanEntradaAluno.pas' {ovF_LanEntradaAluno},
   fListaAlunosPresentes in 'fListaAlunosPresentes.pas' {ovF_ListaAlunosPresentes},
   fra_Dependentes in 'fra_Dependentes.pas' {ovFra_Dependentes: TFrame},
-  fPsqDependentes in 'fPsqDependentes.pas' {ovF_PsqDependentes};
+  fPsqDependentes in 'fPsqDependentes.pas' {ovF_PsqDependentes},
+  fLanSaidaAluno in 'fLanSaidaAluno.pas' {ovF_LanSaidaAluno},
+  fLanFechamento in 'fLanFechamento.pas' {ovF_LanFechamento};
 
 {$R *.res}
 

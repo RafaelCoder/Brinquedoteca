@@ -55,6 +55,9 @@ begin
   try
     if ovF_PsqDependentes = nil then
       ovF_PsqDependentes := TovF_PsqDependentes.Create(Self);
+
+    {if ovCE_CliCodigo.Text <> '' then
+      ovF_PsqDependentes.vsFILTER := ' AND Cli_Codigo = '+ovCE_CliCodigo.Text;}
     if ovF_PsqDependentes.ShowModal = mrOK then
     begin
       ovCE_CliCodigo.Text := ovF_PsqDependentes.oCDS_Pesquisa.FieldByname('Cli_Codigo').AsString;

@@ -1,24 +1,25 @@
-unit fLanEntradaAluno;
+unit fLanSaidaAluno;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes, ComCtrls,
-  RXClock, dmMySQL, uGeral, DB, DBClient;
+  Dialogs, fCadPadrao, StdCtrls, ExtCtrls, fra_Dependentes, RXClock, DB,
+  DBClient, dmMySQL, uGeral, fLanFechamento, ComCtrls;
 
 type
-  TovF_LanEntradaAluno = class(TovF_CadPadrao)
+  TovF_LanSaidaAluno = class(TovF_CadPadrao)
     ovFra_Dependentes1: TovFra_Dependentes;
-    ovDTP_HoraEntrada: TDateTimePicker;
+    ovDTP_HoraSaida: TDateTimePicker;
     Label1: TLabel;
-    Button1: TButton;
+    ovB_Atualizar: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure ovB_CancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure ovB_AtualizarClick(Sender: TObject);
+    procedure ovB_ConfirmarClick(Sender: TObject);
   private
-    { Private declarations }
+    oCDS_Aluno : TClientDataSet;
+    vbFazerFhecamento : Boolean;
   protected
     function fValidaCampos:Boolean; override;
     procedure pGravar; override;
@@ -31,16 +32,16 @@ type
   end;
 
 var
-  ovF_LanEntradaAluno: TovF_LanEntradaAluno;
+  ovF_LanSaidaAluno: TovF_LanSaidaAluno;
 
 implementation
 
 {$R *.dfm}
 
-{ TovF_LanEntradaAluno }
+{ TovF_LanSaidaAluno }
 
 //******************************************************************************
-function TovF_LanEntradaAluno.fValidaCampos: Boolean;
+function TovF_LanSaidaAluno.fValidaCampos: Boolean;
 var
   oCDS : TClientDataSet;
 begin
@@ -63,13 +64,13 @@ begin
       Exit;
     end;
 
-    vsSQL := ' SELECT * FROM Lancamentos WHERE Dep_Codigo = '+ovFra_Dependentes1.ovCE_DepCodigo.Text+
+    vsSQL := ' SELECT Lan_Codigo FROM Lancamentos WHERE Dep_Codigo = '+ovFra_Dependentes1.ovCE_DepCodigo.Text+
              ' AND Cli_Codigo = '+ovFra_Dependentes1.ovCE_CliCodigo.Text+
              ' AND Lan_DataHoraSai IS NULL';
-    ExecSQL(vsSQL, oCDS);
-    if not oCDS.IsEmpty then
+    ExecSQL(vsSQL, oCDS_Aluno);
+    if oCDS_Aluno.IsEmpty then
     begin
-      p_MsgAviso(ovFra_Dependentes1.ovP_DepDescricao.Caption+' já está lançado.');
+      p_MsgAviso(ovFra_Dependentes1.ovP_DepDescricao.Caption+' não está presente.');
       Result := false;
       exit;
     end;
@@ -79,32 +80,33 @@ begin
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.pCarregaDados;
+procedure TovF_LanSaidaAluno.pCarregaDados;
 begin
+  inherited;
 
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.pExcluir;
+procedure TovF_LanSaidaAluno.pExcluir;
 begin
+  inherited;
 
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.pGravar;
+procedure TovF_LanSaidaAluno.pGravar;
 var
   Lan_Codigo : String;
 begin
+  vbFazerFhecamento := false;
   try
+    Lan_Codigo := oCDS_Aluno.FieldByName('Lan_Codigo').AsString;
     DBBeginTrans;
-    Lan_Codigo := IntToStr(f_GetProxCodigo('Lancamentos', 'Lan_Codigo', ''));
-    vsSQL := ' INSERT INTO Lancamentos SET Lan_Codigo = '+Lan_Codigo+
-             ' , Cli_Codigo = '+ f_StrToSQL(ovFra_Dependentes1.ovCE_CliCodigo.Text)+
-             ' , Dep_Codigo = '+ f_StrToSQL(ovFra_Dependentes1.ovCE_DepCodigo.Text)+
-             ' , Lan_DataHoraEnt = '+f_StrToSQL(FormatDateTime('yyyy-mm-dd', Date)+' '+TimeToStr(ovDTP_HoraEntrada.Time))+
-             ' , Lan_Fechado = "N"';
+    vsSQL := ' UPDATE Lancamentos SET Lan_DataHoraSai = '+f_DateToSQL(Now())+
+             ' WHERE Lan_Codigo = '+Lan_Codigo;
     ExecSQL(vsSQL);
     DBCommit;
+    vbFazerFhecamento := true;
   except
     on E : Exception do
     begin
@@ -115,44 +117,65 @@ begin
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.pLimparCampos;
+procedure TovF_LanSaidaAluno.pLimparCampos;
 begin
+  inherited;
   ovFra_Dependentes1.p_Limpar;
-  ovDTP_HoraEntrada.DateTime := Now();
+  ovDTP_HoraSaida.DateTime := Now();
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.pNovo;
+procedure TovF_LanSaidaAluno.pNovo;
 begin
+  inherited;
   ovFra_Dependentes1.ovCE_CliCodigo.SetFocus;
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TovF_LanSaidaAluno.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  if oCDS_Aluno <> nil then
+    FreeAndNil(oCDS_Aluno);
+
   Action := caFree;
   Release;
-  ovF_LanEntradaAluno := nil;
+  ovF_LanSaidaAluno := nil;
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.ovB_CancelarClick(Sender: TObject);
+procedure TovF_LanSaidaAluno.FormCreate(Sender: TObject);
 begin
   inherited;
-  pNovo;
+  oCDS_Aluno := TClientDataSet.Create(Self);
+  ovDTP_HoraSaida.DateTime := Now();  
 end;
 
 //******************************************************************************
-procedure TovF_LanEntradaAluno.FormCreate(Sender: TObject);
+procedure TovF_LanSaidaAluno.ovB_AtualizarClick(Sender: TObject);
 begin
+  ovDTP_HoraSaida.DateTime := Now();
+end;
+
+//******************************************************************************
+procedure TovF_LanSaidaAluno.ovB_ConfirmarClick(Sender: TObject);
+var Lan_Codigo : String;
+begin
+  // caputar o código do movimento para fazer o fechamento depois
+  Lan_Codigo := '0';
   inherited;
-  ovDTP_HoraEntrada.DateTime := Now();
-end;
+  if not vbFazerFhecamento then
+    Exit;
 
-//******************************************************************************
-procedure TovF_LanEntradaAluno.Button1Click(Sender: TObject);
-begin
-  ovDTP_HoraEntrada.DateTime := Now();
+  if not f_MsgConfirma('Deseja realizar o fechamento?') then
+    Exit;
+
+  if ovF_LanFechamento <> nil then
+  begin
+    ovF_LanFechamento.Close;
+    FreeAndNil(ovF_LanFechamento);
+    ovF_LanFechamento := TovF_LanFechamento.Create(Self);
+  end;
+  ovF_LanFechamento.Show;
 end;
 
 //******************************************************************************

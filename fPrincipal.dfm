@@ -35,6 +35,11 @@ object ovF_Principal: TovF_Principal
       end
       object Saidadealuno1: TMenuItem
         Caption = 'Saida de aluno'
+        OnClick = Saidadealuno1Click
+      end
+      object Fechamento1: TMenuItem
+        Caption = 'Fechamento'
+        OnClick = Fechamento1Click
       end
     end
     object Pesquisa1: TMenuItem
@@ -43,6 +48,9 @@ object ovF_Principal: TovF_Principal
         Caption = 'Alunos presentes'
         OnClick = Alunospresentes1Click
       end
+    end
+    object Relatrios1: TMenuItem
+      Caption = 'Relat'#243'rios'
     end
   end
 end

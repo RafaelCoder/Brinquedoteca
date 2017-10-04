@@ -1,5 +1,5 @@
-inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
-  Caption = 'Entrada alunos'
+inherited ovF_LanSaidaAluno: TovF_LanSaidaAluno
+  Caption = 'Sa'#237'da aluno'
   ClientHeight = 87
   ClientWidth = 574
   OldCreateOrder = True
@@ -11,15 +11,14 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
     Left = 473
     Height = 87
     inherited ovB_Pesquisar: TButton
-      Left = 8
-      Top = 109
+      Top = 83
       Visible = False
     end
     inherited ovB_Sair: TButton
-      Top = 50
+      Top = 52
     end
     inherited ovB_Excluir: TButton
-      Top = 85
+      Top = 78
       Visible = False
     end
   end
@@ -27,11 +26,11 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
     Width = 473
     Height = 87
     object Label1: TLabel
-      Left = 12
-      Top = 49
-      Width = 62
+      Left = 11
+      Top = 48
+      Width = 53
       Height = 13
-      Caption = 'Hora entrada'
+      Caption = 'Hora sa'#237'da'
     end
     inline ovFra_Dependentes1: TovFra_Dependentes
       Left = 0
@@ -40,24 +39,24 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
       Height = 51
       TabOrder = 0
     end
-    object ovDTP_HoraEntrada: TDateTimePicker
+    object ovDTP_HoraSaida: TDateTimePicker
       Left = 125
-      Top = 46
-      Width = 94
+      Top = 43
+      Width = 95
       Height = 21
-      Date = 43012.209260486110000000
-      Time = 43012.209260486110000000
+      Date = 43012.206779004630000000
+      Time = 43012.206779004630000000
       Kind = dtkTime
       TabOrder = 1
     end
-    object Button1: TButton
-      Left = 220
-      Top = 48
+    object ovB_Atualizar: TButton
+      Left = 222
+      Top = 46
       Width = 75
-      Height = 18
+      Height = 17
       Caption = 'Atualizar'
       TabOrder = 2
-      OnClick = Button1Click
+      OnClick = ovB_AtualizarClick
     end
   end
 end

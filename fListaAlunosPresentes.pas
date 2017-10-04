@@ -50,7 +50,7 @@ procedure TovF_ListaAlunosPresentes.pAtualiza;
 begin
   vsSQL := ' SELECT L.Lan_Codigo, D.Dep_Codigo, D.Cli_Codigo, PD.Pes_Nome AS Dependente, PC.Pes_Nome AS Responsavel, Lan_DataHoraEnt'+
            ' FROM Lancamentos L'+
-           ' INNER JOIN Dependentes D ON D.Cli_Codigo = L.Cli_Codigo'+
+           ' INNER JOIN Dependentes D ON D.Dep_Codigo = L.Dep_Codigo'+
            '     AND D.Cli_Codigo = L.Cli_Codigo'+
            ' INNER JOIN Pessoas PD ON PD.Pes_Codigo = D.Pes_Codigo'+
            ' INNER JOIN Clientes C ON C.Cli_Codigo = D.Cli_Codigo'+
