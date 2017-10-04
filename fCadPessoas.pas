@@ -414,7 +414,8 @@ end;
 procedure TovF_CadPessoas.ovE_DepNomeExit(Sender: TObject);
 begin
   inherited;
-    ovE_DepNome.Text := UpperCase(ovE_DepNome.Text);
+  ovE_DepNome.Text := UpperCase(ovE_DepNome.Text);
 end;
 
+//******************************************************************************
 end.

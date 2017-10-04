@@ -27,7 +27,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
       Top = 1
       Width = 616
       Height = 350
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet
@@ -239,6 +239,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
           Width = 375
           Height = 21
           TabOrder = 1
+          OnExit = ovE_DepNomeExit
         end
         object ovDE_DepDataNascimento: TDateEdit
           Left = 125

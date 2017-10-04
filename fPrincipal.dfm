@@ -39,7 +39,10 @@ object ovF_Principal: TovF_Principal
     end
     object Pesquisa1: TMenuItem
       Caption = 'Pesquisa'
-      Visible = False
+      object Alunospresentes1: TMenuItem
+        Caption = 'Alunos presentes'
+        OnClick = Alunospresentes1Click
+      end
     end
   end
 end

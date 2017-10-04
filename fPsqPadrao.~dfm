@@ -1,7 +1,7 @@
 object ovF_PsqPadrao: TovF_PsqPadrao
-  Left = 265
+  Left = 266
   Top = 136
-  Width = 1277
+  Width = 1276
   Height = 679
   Caption = 'ovF_PsqPadrao'
   Color = clBtnFace
@@ -15,12 +15,12 @@ object ovF_PsqPadrao: TovF_PsqPadrao
   PrintScale = poNone
   OnCreate = FormCreate
   DesignSize = (
-    1261
+    1260
     640)
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
-    Left = 1121
+    Left = 1120
     Top = 0
     Width = 140
     Height = 640
@@ -57,7 +57,7 @@ object ovF_PsqPadrao: TovF_PsqPadrao
   object ovDBG_Pesquisa: TDBGrid
     Left = 0
     Top = 176
-    Width = 1117
+    Width = 1116
     Height = 464
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = oDS_Pesquisa

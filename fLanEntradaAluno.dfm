@@ -1,6 +1,6 @@
 inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
   Caption = 'Entrada alunos'
-  ClientHeight = 134
+  ClientHeight = 87
   ClientWidth = 641
   OldCreateOrder = True
   OnClose = FormClose
@@ -8,7 +8,7 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
   TextHeight = 13
   inherited pnl1: TPanel
     Left = 540
-    Height = 134
+    Height = 87
     inherited ovB_Pesquisar: TButton
       Left = 8
       Top = 109
@@ -24,7 +24,7 @@ inherited ovF_LanEntradaAluno: TovF_LanEntradaAluno
   end
   inherited ovP_Container: TPanel
     Width = 540
-    Height = 134
+    Height = 87
     inline ovFra_Dependentes1: TovFra_Dependentes
       Left = 0
       Top = 0

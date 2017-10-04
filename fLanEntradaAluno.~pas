@@ -64,6 +64,7 @@ begin
     ExecSQL(vsSQL, oCDS);
     if not oCDS.IsEmpty then
     begin
+      p_MsgAviso(ovFra_Dependentes1.ovP_DepDescricao.Caption+' já está lançado.');
       Result := false;
       exit;
     end;

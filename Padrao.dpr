@@ -7,8 +7,6 @@ uses
   fCadPadrao in 'fCadPadrao.pas' {ovF_CadPadrao},
   fCadPessoas in 'fCadPessoas.pas' {ovF_CadPessoas},
   uGeral in 'uGeral.pas',
-  uControllerPessoas in 'uControllerPessoas.pas' {ControllerPessoas: TDataModule},
-  uDAOPessoas in 'uDAOPessoas.pas' {DAOPessoas: TDataModule},
   fPsqPadrao in 'fPsqPadrao.pas' {ovF_PsqPadrao},
   fPsqPessoas in 'fPsqPessoas.pas' {ovF_PsqPessoas},
   fLanEntradaAluno in 'fLanEntradaAluno.pas' {ovF_LanEntradaAluno},
