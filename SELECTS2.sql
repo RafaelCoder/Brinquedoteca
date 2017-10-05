@@ -48,5 +48,7 @@ ORDER BY Lan_Codigo
 UPDATE Lancamentos SET Lan_DataHoraSai = NULL WHERE Lan_Codigo = 3
 
 ;
+SELECT * FROM Lancamentos;
 
 
+SELECT * FROM fechamentos

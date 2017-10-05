@@ -30,6 +30,7 @@ inherited ovF_LanFechamento: TovF_LanFechamento
       Width = 475
       Height = 22
       TabOrder = 0
+      OnExit = ovFra_Lancamentos1Exit
     end
     object GroupBox1: TGroupBox
       Left = 1
@@ -59,33 +60,36 @@ inherited ovF_LanFechamento: TovF_LanFechamento
         Height = 13
         Caption = 'Total'
       end
-      object DateTimePicker1: TDateTimePicker
+      object ovDTP_HoraEntrada: TDateTimePicker
         Left = 80
         Top = 15
         Width = 70
         Height = 21
         Date = 43012.000000000000000000
         Time = 43012.000000000000000000
+        Enabled = False
         Kind = dtkTime
         TabOrder = 0
       end
-      object DateTimePicker2: TDateTimePicker
+      object ovDTP_HoraSaida: TDateTimePicker
         Left = 215
         Top = 15
         Width = 70
         Height = 21
         Date = 43012.000000000000000000
         Time = 43012.000000000000000000
+        Enabled = False
         Kind = dtkTime
         TabOrder = 1
       end
-      object DateTimePicker3: TDateTimePicker
+      object ovDTP_TotalHoras: TDateTimePicker
         Left = 328
-        Top = 14
+        Top = 15
         Width = 70
         Height = 21
         Date = 43012.000000000000000000
         Time = 43012.000000000000000000
+        Enabled = False
         Kind = dtkTime
         TabOrder = 2
       end
@@ -111,16 +115,17 @@ inherited ovF_LanFechamento: TovF_LanFechamento
         Height = 13
         Caption = 'Valor total'
       end
-      object RxCalcEdit1: TRxCalcEdit
+      object ovCE_VlrHora: TRxCalcEdit
         Left = 88
         Top = 15
         Width = 95
         Height = 21
         AutoSize = False
+        Enabled = False
         NumGlyphs = 2
         TabOrder = 0
       end
-      object RxCalcEdit2: TRxCalcEdit
+      object ovCE_VlrTotal: TRxCalcEdit
         Left = 252
         Top = 15
         Width = 95
@@ -130,7 +135,7 @@ inherited ovF_LanFechamento: TovF_LanFechamento
         TabOrder = 1
       end
     end
-    object CheckBox1: TCheckBox
+    object ovCB_Fechado: TCheckBox
       Left = 10
       Top = 21
       Width = 97
