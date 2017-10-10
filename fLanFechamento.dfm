@@ -121,9 +121,9 @@ inherited ovF_LanFechamento: TovF_LanFechamento
         Width = 95
         Height = 21
         AutoSize = False
-        Enabled = False
         NumGlyphs = 2
         TabOrder = 0
+        OnChange = ovCE_VlrHoraChange
       end
       object ovCE_VlrTotal: TRxCalcEdit
         Left = 252
@@ -131,6 +131,7 @@ inherited ovF_LanFechamento: TovF_LanFechamento
         Width = 95
         Height = 21
         AutoSize = False
+        Enabled = False
         NumGlyphs = 2
         TabOrder = 1
       end

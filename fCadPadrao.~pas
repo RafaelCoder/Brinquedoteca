@@ -20,6 +20,7 @@ type
     procedure ovB_CancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ovB_ExcluirClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   protected
@@ -76,6 +77,17 @@ begin
   pExcluir;
   pLimparCampos;
   pNovo;
+end;
+
+//******************************************************************************
+procedure TovF_CadPadrao.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  showmessage('teste');
+  If key = #13 then Begin 
+    //se for, passa o foco para o próximo campo, zerando o valor da variável Key 
+    Key:= #0; 
+    Perform(Wm_NextDlgCtl,0,0); 
+  end;
 end;
 
 end.

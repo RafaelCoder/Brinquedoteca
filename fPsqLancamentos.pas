@@ -26,6 +26,7 @@ type
     oCDS_PesquisaLan_VlrHora: TFloatField;
     oCDS_PesquisaLan_VlrTotal: TFloatField;
     oCDS_PesquisaLan_Data: TDateField;
+    oCDS_PesquisaLan_TotalHoras: TDateTimeField;
     procedure FormCreate(Sender: TObject);
     procedure ovB_AtualizarClick(Sender: TObject);
   private
@@ -59,7 +60,7 @@ begin
   inherited;
   vsSELECT := ' SELECT L.Lan_Codigo, D.Dep_Codigo, D.Cli_Codigo, PD.Pes_Nome AS Dependente, PC.Pes_Nome AS Responsavel,'+
               '   TIME(Lan_DataHoraEnt) AS Lan_DataHoraEnt, DATE(Lan_DataHoraEnt) AS Lan_Data, TIME(Lan_DataHoraSai) AS Lan_DataHoraSai,'+
-              '   Lan_Fechado, Lan_VlrHora, Lan_VlrTotal'+
+              '   Lan_Fechado, Lan_VlrHora, Lan_VlrTotal, TIMEDIFF(Lan_DataHoraSai, Lan_DataHoraEnt) AS Lan_TotalHoras'+
               ' FROM Lancamentos L'+
               ' INNER JOIN Dependentes D ON D.Dep_Codigo = L.Dep_Codigo'+
               '     AND D.Cli_Codigo = L.Cli_Codigo'+

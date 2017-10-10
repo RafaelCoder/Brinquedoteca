@@ -27,7 +27,7 @@ inherited ovF_CadPessoas: TovF_CadPessoas
       Top = 1
       Width = 616
       Height = 350
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet

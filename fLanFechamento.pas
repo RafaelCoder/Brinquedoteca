@@ -25,6 +25,7 @@ type
     ovCB_Fechado: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ovFra_Lancamentos1Exit(Sender: TObject);
+    procedure ovCE_VlrHoraChange(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -114,8 +115,7 @@ begin
              ' , Fec_VlrHora = '+VirgulaPorPonto(FormatFloat('0.00', ovCE_VlrHora.Value))+
              ' , Fec_VlrDesc = 0'+
              ' , Fec_VlrTotal = '+VirgulaPorPonto(FormatFloat('0.00', ovCE_VlrTotal.Value));
-             ;
-
+    ExecSQL(vsSQL);
     DBCommit;
   except
     on E : Exception do
@@ -178,6 +178,17 @@ begin
   finally
     FreeAndNil(oCDS);
   end;
+end;
+
+//******************************************************************************
+procedure TovF_LanFechamento.ovCE_VlrHoraChange(Sender: TObject);
+var
+  myHour, myMin, mySec, myMilli : Word;
+  vfVlrTotal : Double;
+begin
+  DecodeTime(ovDTP_TotalHoras.DateTime, myHour, myMin, mySec, myMilli);
+  vfVlrTotal := (((myHour * 60) + myMin) / 60) * ovCE_VlrHora.Value;
+  ovCE_VlrTotal.Value := vfVlrTotal;
 end;
 
 //******************************************************************************

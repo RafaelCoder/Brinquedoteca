@@ -65,6 +65,12 @@ inherited ovF_PsqLancamentos: TovF_PsqLancamentos
       end
       item
         Expanded = False
+        FieldName = 'Lan_TotalHoras'
+        Title.Caption = 'Total horas'
+        Visible = True
+      end
+      item
+        Expanded = False
         FieldName = 'Lan_Fechado'
         Title.Caption = 'Fechado'
         Visible = True
@@ -149,6 +155,9 @@ inherited ovF_PsqLancamentos: TovF_PsqLancamentos
     end
     object oCDS_PesquisaLan_VlrTotal: TFloatField
       FieldName = 'Lan_VlrTotal'
+    end
+    object oCDS_PesquisaLan_TotalHoras: TDateTimeField
+      FieldName = 'Lan_TotalHoras'
     end
   end
 end
