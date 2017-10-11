@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, DB, DBClient, dmMySQL, uGeral, fCadPessoas, fLanEntradaAluno,
-  fLanSaidaAluno, fLanFechamento, fPsqLancamentos;
+  fLanSaidaAluno, fLanFechamento, fPsqLancamentos, fRelFiltrosFaixaEtaria;
 
 type
   TovF_Principal = class(TForm)
@@ -20,12 +20,14 @@ type
     Relatrios1: TMenuItem;
     Fechamento1: TMenuItem;
     Lanamentos2: TMenuItem;
+    Faixaetria1: TMenuItem;
     procedure Alunos1Click(Sender: TObject);
     procedure Entradadealuno1Click(Sender: TObject);
     procedure Alunospresentes1Click(Sender: TObject);
     procedure Saidadealuno1Click(Sender: TObject);
     procedure Fechamento1Click(Sender: TObject);
     procedure Lanamentos2Click(Sender: TObject);
+    procedure Faixaetria1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -90,6 +92,14 @@ begin
   finally
     FreeAndNil(ovF_PsqLancamentos);
   end;
+end;
+
+//******************************************************************************
+procedure TovF_Principal.Faixaetria1Click(Sender: TObject);
+begin
+  if ovF_RelFiltrosFaixaEtaria = nil then
+    ovF_RelFiltrosFaixaEtaria := TovF_RelFiltrosFaixaEtaria.Create(Self);
+  ovF_RelFiltrosFaixaEtaria.Show;
 end;
 
 //******************************************************************************

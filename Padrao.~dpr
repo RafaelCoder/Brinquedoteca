@@ -15,7 +15,11 @@ uses
   fPsqDependentes in 'fPsqDependentes.pas' {ovF_PsqDependentes},
   fLanSaidaAluno in 'fLanSaidaAluno.pas' {ovF_LanSaidaAluno},
   fLanFechamento in 'fLanFechamento.pas' {ovF_LanFechamento},
-  fPsqLancamentos in 'fPsqLancamentos.pas' {ovF_PsqLancamentos};
+  fPsqLancamentos in 'fPsqLancamentos.pas' {ovF_PsqLancamentos},
+  fra_Lancamentos in 'fra_Lancamentos.pas' {ovFra_Lancamentos: TFrame},
+  fRelFaixaEtaria in 'fRelFaixaEtaria.pas' {ovRel_FaixaEtaria},
+  fRelFiltrosPadrao in 'fRelFiltrosPadrao.pas' {ovF_RelFiltrosPadrao},
+  fRelFiltrosFaixaEtaria in 'fRelFiltrosFaixaEtaria.pas' {ovF_RelFiltrosFaixaEtaria};
 
 {$R *.res}
 

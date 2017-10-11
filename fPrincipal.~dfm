@@ -55,6 +55,10 @@ object ovF_Principal: TovF_Principal
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios'
+      object Faixaetria1: TMenuItem
+        Caption = 'Faixa et'#225'ria'
+        OnClick = Faixaetria1Click
+      end
     end
   end
 end
