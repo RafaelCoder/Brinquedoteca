@@ -61,7 +61,15 @@ end;
 //******************************************************************************
 procedure Todm_MySQL.DataModuleCreate(Sender: TObject);
 begin
-  pInicializa;
+  try
+    pInicializa;
+  except
+    on E : Exception do
+    begin
+      p_MsgAviso(E.Message);
+      Application.Terminate;
+    end;
+  end;
 end;
 
 //******************************************************************************

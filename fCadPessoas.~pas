@@ -116,14 +116,14 @@ begin
     Exit;
   end;
 
-  if fExtraisNumeros(ovME_CPF.Text) = '' then
+  {if fExtraisNumeros(ovME_CPF.Text) = '' then
   begin
     p_MsgAviso('CPF é obrigatório.');
     ovPC_Container.TabIndex := 0;
     ovME_CPF.SetFocus;
     Result := false;
     Exit;
-  end;
+  end;}
 
   vsSQL := 'SELECT Pes_Codigo FROM Clientes WHERE Cli_Codigo = '+ovCE_Codigo.Text;
   ExecSQL(vsSQL, oCDS);
@@ -438,6 +438,5 @@ begin
 end;
 
 //******************************************************************************
-end;
 
 end.

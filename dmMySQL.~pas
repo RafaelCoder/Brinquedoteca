@@ -61,7 +61,15 @@ end;
 //******************************************************************************
 procedure Todm_MySQL.DataModuleCreate(Sender: TObject);
 begin
-  pInicializa;
+  try
+    pInicializa;
+  except
+    on E : Exception do
+    begin
+      p_MsgAviso(E.Message);
+      Application.Terminate;
+    end;
+  end;
 end;
 
 //******************************************************************************
@@ -167,7 +175,7 @@ end;
 //******************************************************************************
 procedure DBCommit;
 begin
-  if not odm_MySQL.ZConnection.InTransaction then
+  if odm_MySQL.ZConnection.InTransaction then
     odm_MySQL.ZConnection.Commit;
 end;
 

@@ -116,26 +116,30 @@ begin
     Exit;
   end;
 
-  if fExtraisNumeros(ovME_CPF.Text) = '' then
+  {if fExtraisNumeros(ovME_CPF.Text) = '' then
   begin
     p_MsgAviso('CPF é obrigatório.');
     ovPC_Container.TabIndex := 0;
     ovME_CPF.SetFocus;
     Result := false;
     Exit;
-  end;
+  end;}
 
-  vsSQL := 'SELECT Pes_Codigo FROM Clientes WHERE Cli_Codigo = '+ovCE_Codigo.Text;
-  ExecSQL(vsSQL, oCDS);
-  vsSQL := ' SELECT Pes_Codigo FROM Pessoas WHERE Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text);
-  if not oCDS.IsEmpty then
-    vsSQL := vsSQL + ' AND Pes_Codigo <> '+oCDS.FieldByName('Pes_Codigo').AsString;
-  ExecSQL(vsSQL, oCDS);
-  if not oCDS.IsEmpty then
+
+  if fExtraisNumeros(ovME_CPF.Text) <> '' then
   begin
-    p_MsgAviso('Já existe um cliente cadastrado com este CPF');
-    Result := false;
-    exit;
+    vsSQL := 'SELECT Pes_Codigo FROM Clientes WHERE Cli_Codigo = '+ovCE_Codigo.Text;
+    ExecSQL(vsSQL, oCDS);
+    vsSQL := ' SELECT Pes_Codigo FROM Pessoas WHERE Pes_CPFCNPJ = '+f_StrToSQL(ovME_CPF.Text);
+    if not oCDS.IsEmpty then
+      vsSQL := vsSQL + ' AND Pes_Codigo <> '+oCDS.FieldByName('Pes_Codigo').AsString;
+    ExecSQL(vsSQL, oCDS);
+    if not oCDS.IsEmpty then
+    begin
+      p_MsgAviso('Já existe um cliente cadastrado com este CPF');
+      Result := false;
+      exit;
+    end;
   end;
 
 end;
