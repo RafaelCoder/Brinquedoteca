@@ -48,7 +48,7 @@ end;
 //******************************************************************************
 procedure TovF_ListaAlunosPresentes.pAtualiza;
 begin
-  vsSQL := ' SELECT L.Lan_Codigo, D.Dep_Codigo, D.Cli_Codigo, PD.Pes_Nome AS Dependente, PC.Pes_Nome AS Responsavel, Lan_DataHoraEnt'+
+  vsSQL := ' SELECT L.Lan_Codigo, D.Dep_Codigo, D.Cli_Codigo, PD.Pes_Nome AS Dependente, PC.Pes_Nome AS Responsavel, TIME(Lan_DataHoraEnt) as Lan_DataHoraEnt'+
            ' FROM Lancamentos L'+
            ' INNER JOIN Dependentes D ON D.Dep_Codigo = L.Dep_Codigo'+
            '     AND D.Cli_Codigo = L.Cli_Codigo'+

@@ -40,13 +40,18 @@ implementation
 function TovF_RelFiltrosFaixaEtaria.fGetDados: Boolean;
 begin
   Result := true;
+  ovRel_FaixaEtaria.oCDS_Relatorio.EmptyDataSet;
   vsSQL := ' SELECT PD.Pes_Nome, YEAR(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(PD.Pes_DataNascimento))) AS idade'+
            ' FROM Dependentes D'+
            ' INNER JOIN Pessoas PD ON D.Pes_Codigo = PD.Pes_Codigo'+
            ' INNER JOIN Lancamentos L ON L.Cli_Codigo = D.Cli_Codigo'+
            '     AND L.Dep_Codigo = D.Dep_Codigo'+
-           ' WHERE 1=1'+
-           ' GROUP BY D.Dep_Codigo, D.Cli_Codigo'+
+           ' WHERE 1=1';
+  if ovDE_De.Date <> 0 then
+    vsSQL := vsSQL + ' AND DATE(Lan_DataHoraEnt) >= '+f_DateToSQL(ovDE_De.Date);
+  if ovDE_Ate.Date <> 0 then
+    vsSQL := vsSQL + ' AND DATE(Lan_DataHoraEnt) <= '+f_DateToSQL(ovDE_Ate.Date);
+  vsSQL := vsSQL + ' GROUP BY D.Dep_Codigo, D.Cli_Codigo'+
            ' ORDER BY Idade, Pes_Nome';
   ExecSQL(vsSQL, ovRel_FaixaEtaria.oCDS_Relatorio);
   Result := not ovRel_FaixaEtaria.oCDS_Relatorio.IsEmpty;
